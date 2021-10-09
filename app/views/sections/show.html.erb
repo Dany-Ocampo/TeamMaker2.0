@@ -1,0 +1,143 @@
+<div class="container" style="padding-top:2%">
+    <div class="row">
+        <div class="col s12">
+            <h4 align="center"><b>Sección:</b>
+                <span class="sub-titulo"><%= @seccion.code %></span>
+            </h4>
+            <% if @seccion.id != nil %>
+            <div class="row">
+                <div class="col s12 l6 center">
+                    <strong>Profesor(es): </strong>
+                    <p>
+                        <% if @seccion.users.where(rol: 1).count == 0 %>
+                        Ningún profesor asignado aún
+                        <% else %>
+                        <% @seccion.users.where(rol: 1).each do |t| %>
+                        <span class="chip">
+                            <%= t.email %>
+                        </span>
+                        <% end %>
+                        <% end %>
+                    </p>
+                </div>
+                <div class="col s12 l6 center">
+                    <strong>Ayudante(s): </strong>
+                    <p>
+                        <% if @seccion.users.where(rol: 2).count == 0 %>
+                        Ningún ayudante asignado aún
+                        <% else %>
+                        <% @seccion.users.where(rol: 2).each do |t| %>
+                        <span class="chip">
+                            <%= t.email %>
+                        </span>
+                        <% end %>
+                        <% end %>
+                    </p>
+                </div>
+            </div>
+            <% end %>
+
+
+
+            <h3 style="display: inline"><b>Buscador de:</b></h3>
+            <h4 class="sub-titulo" style="display: inline; color:#999999"> Estudiantes</h4>
+            <% if current_user.rol == 1 %>
+            <a class="right btn-floating btn-large waves-effect waves-light btn green accent-4 tooltipped modal-trigger" href="#nuevoUsuario" data-position="top" data-delay="50" data-tooltip="Nuevo usuario"><i class="material-icons" style="font-size:2.4rem">person_add</i></a>
+            <% end %>
+
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large black tooltipped" data-position="top" data-delay="50" data-tooltip="Paginación">
+                    <i class="large material-icons">description</i>
+                </a>
+                <ul>
+                    <li> <%= link_to '<p style="line-height:0%;font-size: 20px;text-align: center;">5</p>'.html_safe, 
+          section_path(@seccion.id,:per_page => 5),:onchange => "if(this.value){window.location='?per_page='+this.value;}",class: "btn-floating blue lighten-2" %></li>
+                    <li> <%= link_to '<p style="line-height:0%;font-size: 20px;text-align: center;">10</p>'.html_safe, 
+          section_path(@seccion.id,:per_page => 10),:onchange => "if(this.value){window.location='?per_page='+this.value;}",class: "btn-floating blue" %></li>
+                    <li> <%= link_to '<p style="line-height:0%;font-size: 20px;text-align: center;">30</p>'.html_safe, section_path(@seccion.id,:per_page => 30),:onchange => "if(this.value){window.location='?per_page='+this.value;}",class: "btn-floating blue darken-4" %></li>
+                </ul>
+            </div>
+            <hr><br><br>
+            <div class="row">
+                <div class="col l4 s12">
+                    <%= form_tag section_path(@seccion.id), :method => 'get' do %>
+                    <div class="row">
+                        <div class="field right col l6 s12">
+                            <%= label :search_status, "Estado" %>
+                            <%= select_tag :search_status, options_for_select([['Activo','t'],['Baneado','f']], params[:search_status]), class: "form-control", :prompt => 'Ninguno' %>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l6 m12 s12">
+                    <%= label :search, "Contenido de la búsqueda" %>
+                    <div class="row">
+                        <div class="col l10 m10 s10">
+                            <nav style="background-color: #0089ec;height: 45px !important;padding: 0 0;">
+                                <div class="input-field">
+                                    <%= text_field_tag :search, params[:search], type: "search", style:"padding-left:1rem; width:100%"%>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col l2 m2 s2" style="padding: 0 0;">
+                            <%= button_tag(type: "submit", class: "btn waves-effect waves-light", style: "height: 45px !important;width: calc(100% - 10px);padding: 0 0;") do %>
+                            <i class="material-icons " style="line-height: 48px;padding-right: -28px;font-size: 2rem;">search</i>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+            <hr>
+            <table class="striped centered responsive-table">
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                        <th><% if current_user.rol == 1 %>Acciones <% else %> Ver <% end %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @users.each do |user| %>
+                    <!-- Modal Ver usuario-->
+                    <div id="verUsuario<%= user.id %>" class="modal">
+                        <%= render :partial => "users/shared/show_user", locals: {user: user} %>
+                    </div>
+                    <!-- Modal Editar usuario-->
+                    <div id="editarUsuario<%= user.id %>" class="modal modal-fixed-footer">
+                        <%= render :partial => "users/shared/edit_user", locals: {user: user} %>
+                    </div>
+
+                    <tr <%if user.status == false%> style="color:#F44336;" <% end %>>
+                        <td><%= user.email %></td>
+                        <td>
+                            <% if user.status == true %>
+                            Activo
+                            <% elsif user.status == false %>
+                            Baneado
+                            <% else %>
+                            No definido
+                            <% end %>
+                        </td>
+                        <td>
+                            <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#verUsuario<%= user.id%>" style="background-color:#2196f3; border-color:#0d8aee"><i class="material-icons">perm_identity</i></a>
+                            <% if current_user.rol == 1 %>
+                            <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarUsuario<%= user.id%>" style="background-color:#ff9800; border-color:#e68900"><i class="material-icons">mode_edit</i></a>
+                            <%= link_to '<i class="material-icons">delete_forever</i>'.html_safe, user, method: :delete, data: { confirm: "¿Estás seguro que deseas eliminar a este usuario?" },class: "btn-floating waves-effect waves-light red" %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <% if !@users.present? %>
+            <h1 class="text-center">No se ha encontrado ninguna coincidencia :(</h1>
+            <% end %>
+            <div class="center-align"><%= will_paginate @users,renderer: MaterializePagination::Rails %></div>
+
+            <!-- Modal nuevo usuario -->
+            <div id="nuevoUsuario" class="modal modal-fixed-footer">
+                <%= render :partial => "users/shared/new_user", locals: {sections: @sections, programs: @programs} %>
+            </div>
+        </div>
+    </div>
+</div>

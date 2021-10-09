@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <h3>Editar sección</h3>
+    <%= form_for(section) do |s| %>
+    <!-- Inicio de form -->
+    <% if alert && alert[0] == section.id %>
+    <div class="card-panel card-fix red lighten-4 red-text center-align">
+        <% alert.each do |msg| %>
+        <% if msg != section.id %>
+        <p class="alert">- <%= msg %></p>
+        <% end %>
+        <% end %>
+    </div>
+    <% end %>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :code, "Sección" %>
+            <%= s.text_field :code, autofocus: true, class: "validate", required: "true", placeholder:"Ej: A-1"  %>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :year, "Año" %>
+            <%= s.number_field :year, placeholder:"2017", class: 'validate', required: "true"%>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :semester, "Semestre" %>
+        <div class="input-field">
+            <select name="section[semester]" class="browser-default">
+                <option <%if s.object.semester == 1 %>selected<% end %> value=1>Primero</option>
+                <option <%if s.object.semester == 2 %>selected<% end %> value=2>Segundo</option>
+            </select>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :section_type, "Tipo" %>
+        <div class="input-field">
+            <select name="section[section_type]" class="browser-default">
+                <option <%if true %>selected<% end %> value='t'>Cátedra</option>
+                <option <%if false %>selected<% end %> value='f'>Laboratorio</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect btn red left">Volver</a>
+    <%= s.submit 'Actualizar sección', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + section.code + "? ')",class: "btn right" %>
+    <% end %>
+    <!-- termino del form-->
+</div>

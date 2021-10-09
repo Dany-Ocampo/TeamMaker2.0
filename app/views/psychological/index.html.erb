@@ -1,0 +1,43 @@
+<div class="container center" style="padding-top:5%">
+    <div class="row">
+        <div class="col s12">
+            <% if current_user.test_count != 6 %>
+            <h2 style="display: inline"><b>Test de personalidad</b></h2>
+            <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
+
+            <% if current_user.test_count == 1 || current_user.test_count == 2 %>
+            <div class="card-panel green white-text">
+                <i class="large material-icons">info_outline</i>
+                <p class="flow-text" align="center" style="margin:0;">Usted tiene 0 intentos registrados.</p>
+            </div>
+            <% elsif current_user.test_count == 3 || current_user.test_count == 4 %>
+            <div class="card-panel  amber darken-1 white-text">
+                <i class="large material-icons">warning</i>
+                <p class="flow-text" align="center" style="margin:0;">¡Sus respuestas no coinciden! Si falla nuevamente debera contestar un test muy largo. (preste atención a lo que lee)</p>
+            </div>
+            <% elsif current_user.test_count == 5 %>
+            <div class="card-panel  red darken-1 white-text">
+                <i class="large material-icons">new_releases</i>
+                <p class="flow-text" align="center" style="margin:0;">¡Sus respuestas no coinciden!</p>
+                <p class="flow-text" align="center" style="margin:0;">Debera contestar un test más largo.</p>
+            </div>
+            <% end %>
+
+            <p class="flow-text" align="center">Este test psicológico le permitirá conocer su tipo de personalidad además de aportar información relevante para que la generación de su equipo de trabajo se realice bajo el mayor nivel de compatibilidad posible el cual podrá conocer al finalizar el test.</p>
+
+            <% if current_user.test_count == 1 || current_user.test_count == 2 || current_user.test_count == 5 %>
+            <%= link_to "Ir al test", test_eneagrama_test_path , class: "btn btn-large blue waves-effect waves-light" %>
+            <% elsif current_user.test_count == 3 || current_user.test_count == 4 %>
+            <%= link_to "Volver a intentar", test_eneagrama_test_path , class: "btn btn-large blue waves-effect waves-light" %>
+            <% end %>
+
+            <br><br><br>
+            <% else %>
+            <h2 style="display: inline"><b>Tipo de personalidad</b></h2>
+            <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
+            <%= render :partial => "psychological/shared/enea" %>
+            <a href="http://eneagrama.personarte.com/eneatipos/" class="btn btn-large blue waves-effect waves-light" target="_blank">Saber más...</a>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="modal-content">
+    <h3>Nueva sección</h3>
+    <% if @section.errors.any? %>
+    <div class="card-panel card-fix red lighten-4 red-text ">
+        <% @section.errors.full_messages.each do |msg| %>
+        <p class="alert">- <%= msg %></p>
+        <% end %>
+    </div>
+    <% end %>
+    <%= form_for(@section) do |s| %>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :code, "Sección" %>
+            <%= s.text_field :code, autofocus: true, class: "validate", required: "true", placeholder:"Ej: A-1"  %>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :year, "Año" %>
+            <%= s.number_field :year, placeholder:"2017", class: 'validate', required: "true"%>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :semester, "Semestre" %>
+        <div class="input-field">
+            <select name="section[semester]" class="browser-default">
+                <option value=1>Primero</option>
+                <option value=2>Segundo</option>
+            </select>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :section_type, "Tipo" %>
+        <div class="input-field">
+            <select name="section[section_type]" class="browser-default">
+                <option value='t'>Cátedra</option>
+                <option value='f'>Laboratorio</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect btn left red">Volver</a>
+    <%= s.submit 'Crear sección', :class  => "btn right" %>
+    <% end %>
+</div>

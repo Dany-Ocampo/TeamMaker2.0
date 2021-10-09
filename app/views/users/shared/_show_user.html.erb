@@ -1,0 +1,126 @@
+<div class="modal-content left-align black-text">
+    <h5 id="nuevoUsuarioTag<%= user.id %>"><b>USUARIO:</b>
+        <% if user.rol == 0 %>
+        <span style="color:#2196F3 !important;">Coordinador</span>
+        <% elsif user.rol == 1%>
+        <span style="color:#2196F3 !important;">Profesor</span>
+        <% elsif user.rol == 2 %>
+        <span style="color:#2196F3 !important;">Ayudante</span>
+        <% elsif user.rol == 3 %>
+        <span style="color:#2196F3 !important;">Estudiante</span>
+        <% else %>
+        <span style="color:#2196F3 !important;">No definido</span>
+        <% end %>
+        <% if current_user.rol == 1 %>
+        <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarUsuario<%= user.id%>" style="background-color:#ff9800; border-color:#e68900;font-size: 16px"><i class="material-icons">mode_edit</i></a>
+        <% end %>
+    </h5>
+    <% if user.id != nil %>
+    <div class="row">
+        <div class="col l6">
+            <p>
+                <b>Nombre:</b>
+                <%= user.name + ' ' + user.surname %>
+            </p>
+            <p>
+                <b>Correo:</b>
+                <%= user.email %>
+            </p>
+            <p>
+                <b>Sección:</b>
+                <% user.sections.each do |h| %>
+                <span class="chip">
+                    <%= h.code %>
+                </span>
+                <% end %>
+            </p>
+            <% if user.rol == 3%>
+            <p>
+                <b>Programas:</b>
+                <% user.programs.each do |p| %>
+                    <span class='chip'>
+                        <%= p.name %>
+                    </span>
+                <% end %>
+            </p>
+            <%end%>
+            <p>
+                <b>Estado:</b>
+                <% if user.status == true %>
+                <span class="new badge green" data-badge-caption="Activo"></span>
+                <% elsif user.status == false %>
+                <span class="new badge red" data-badge-caption="Suspendido"></span>
+                <% else %>
+                No definido
+                <% end %>
+            </p>
+        </div>
+        <% if user.rol == 3 %>
+        <div class="col l6">
+            <p>
+                <b>Organizado por:</b>
+                <% if user.accept_model == true %>
+                El profesor
+                <% elsif user.accept_model == false %>
+                Los estudiantes
+                <% elsif user.accept_model == nil %>
+                No informado
+                <% end %>
+            </p>
+            <% if user.accept_model == true %>
+            <p>
+                <b>
+                    <p style="margin-bottom: 0px;">Estado test de afinidad social:</p>
+                </b>
+
+                <% if !user.tests.find_by(kind: 2).answered? %>
+                <span class="new badge red" data-badge-caption="0/2 test" style="margin: 0;"></span>
+                <% elsif !user.tests.find_by(kind: 3).answered? %>
+                <span class="new badge amber darken-1" data-badge-caption="1/2 test" style="margin: 0;"></span>
+                <% else %>
+                <span class="new badge green" data-badge-caption="Test resueltos" style="margin: 0;"></span>
+                <% end %>
+            </p>
+
+            <p>
+                <b>
+                    <p style="margin-bottom: 0px;">Estado test de personalidad:</p>
+                </b>
+                <% if user.accept_model == true %>
+                <% if user.test_count == 1 || user.test_count == 2 %>
+                <span class="new badge purple" data-badge-caption="1° Intento" style="margin: 0;"></span>
+                <% elsif user.test_count == 3 || user.test_count == 4 %>
+                <span class="new badge blue" data-badge-caption="2° Intento" style="margin: 0;"></span>
+                <% elsif user.test_count == 5 %>
+                <span class="new badge red" data-badge-caption="3° Intento" style="margin: 0;"></span>
+                <% elsif user.test_count == 6 %>
+                <span class="new badge green" data-badge-caption="Test resuelto" style="margin: 0;"></span>
+                <% end %>
+                <% if user.test_count == 1 || user.test_count == 3 %>
+                <span class="new badge red" data-badge-caption="0/2 test" style="margin-left: 5px;"></span>
+                <% elsif user.test_count == 2 || user.test_count == 4 %>
+                <span class="new badge amber darken-3" data-badge-caption="1/2 test" style="margin-left: 5px;"></span>
+                <% elsif user.test_count == 5 %>
+                <span class="new badge red" data-badge-caption="0/1 test" style="margin-left: 5px;"></span>
+                <% end %>
+                <% end %>
+            </p>
+            <% end %>
+
+            <p>
+                <b>N° de grupo:</b>
+                <% if user.group != nil %>
+                <%= user.group %>
+                <% else %>
+                Ninguno
+                <% end %>
+            </p>
+        </div>
+        <% end %>
+
+    </div>
+    <% end %>
+</div>
+<div class="modal-footer">
+    <a class="modal-action modal-close waves-effect btn red">Volver</a>
+</div>

@@ -1,0 +1,59 @@
+<%= form_tag import_users_path, multipart: true do %>
+  <div class="modal-content" style="padding: 0px 24px;">
+    <h5>Importar usuarios</h5>
+    <div class="card-panel" style="padding: 5px 24px;background-color: #444444 !important;">
+      <p class="white-text" align="justify" style="margin: 5px 0;">
+      Seleccione el archivo <b style="color:#5ab5ff;">.CSV</b> 
+      con los estudiantes a ingresar al sistema con el siguiente formato:</p>
+
+      <table class="white-text bordered centered responsive-table">
+        <thead>
+          <tr style="color:#5ab5ff;">
+            <th style="padding: 5px 5px;">email</th>
+            <th style="padding: 5px 5px;">name</th>
+            <th style="padding: 5px 5px;">surname</th>
+            <th style="padding: 5px 5px;">password</th>
+            <th style="padding: 5px 5px;">section</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td style="padding: 5px 5px;">pedro@mail.cl</td>
+            <td style="padding: 5px 5px;">Pedro</td>
+            <td style="padding: 5px 5px;">Araya</td>
+            <td style="padding: 5px 5px;">pass123</td>
+            <td style="padding: 5px 5px;">A-1</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="row" href="#" style="margin-bottom: 0px;">
+        <div class="col s12 l2">
+          <div class="btn gris3">
+          <i class="material-icons" style="font-size:2rem">file_upload</i>
+          <%= file_field_tag :file, class:'align:center' %>
+          </div>
+        </div>
+        <div class="col s12 l10">
+          <input class="file-path validate" placeholder="Seleccionar .CSV" />
+        </div>
+      </div>    
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-red btn red left">Volver</a>
+    <input type="submit" name="commit" value="importar" data-disable-with="importar" class="waves-effect btn right" style="visibility: visible;">
+  </div>
+ <% end %>

@@ -1,0 +1,198 @@
+<div class="card-panel blue lighten-2" style="padding: 10px 24px;">
+    <strong class="white-text flow-text"><b>INSTRUCCIONES: </b></strong>
+    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;">Conteste <b style="color:#005396;">cada pregunta</b> con la mayor sinceridad posible, pensado siempre en la opción que lo identifique de mejor forma en el presente y considerando un amplio periodo de su vida. Cada una de las preguntas tiene <b style="color:#005396;">5 opciones </b>que representan las afirmaciones a continuación:</p>
+
+    <p class="flow-text" align="justify" style="margin: 1rem 0;">
+        <b>
+            1. No siempre<br>
+            2. Rara vez cierto<br>
+            3. Algo cierto<br>
+            4. Cierto<br>
+            5. Muy cierto</b>
+    </p>
+
+</div>
+<br>
+
+<table class="striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Preguntas</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+        </tr>
+    </thead>
+    <%= form_tag({:action => "create"}) do %>
+    <tbody>
+        <% for question in 1..45%>
+        <tr id="pregunta<%= question%>">
+            <td>
+                <%if question == 1%>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Creo que he pagado un elevado precio por tratar de ser perfecto.
+                <p>
+                    <% elsif question == 2 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Mis principios e ideales me estimulan hacia mayores logros y dan sentido y valor a mi vida.
+                <p>
+                    <% elsif question == 3 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Depende tanto de mí que se hagan las cosas que tengo que ser más organizado y metódico que los demás.
+                <p>
+                    <% elsif question == 4 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me imagino que tengo una misión personal, tal vez una vocación para algo superior, y creo que durante mi vida podría realizar algo extraordinario.
+                <p>
+                    <% elsif question == 5 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Detesto los errores, por lo tanto tiendo a ser muy minucioso para asegurarme de que las cosas se hagan bien.
+                <p>
+                    <% elsif question == 6 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Mí auténtico interés por los demás hace que me involucre profundamente con ellos, con sus esperanzas, sus sueños y necesidades.
+                <p>
+                    <% elsif question == 7 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>No puedo ver un perro extraviado en la calle sin desear llevármelo a casa.
+                <p>
+                    <% elsif question == 8 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Es cierto que suelo hacer más por los demás de lo que debiera; doy demasiado y no pienso en mí lo suficiente.
+                <p>
+                    <% elsif question == 9 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Hago un esfuerzo especial por saber qué les pasa a las personas que quiero.
+                <p>
+                    <% elsif question == 10 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Con frecuencia mi salud y mi economía han sufrido debido a que antepongo las necesidades e intereses de los demás a los míos.
+                <p>
+                    <% elsif question == 11 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me considero una persona muy competente: en realidad, me molesta no ser eficaz y eficiente.
+                <p>
+                    <% elsif question == 12 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Es importante para mí sentir que tengo éxito, aunque aún no sea el éxito que deseo.
+                <p>
+                    <% elsif question == 13 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Para bien o para mal, soy bueno para encubrir mis inseguridades; nadie adivina jamás qué siento realmente.
+                <p>
+                    <% elsif question == 14 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Sé lo bien que les va a mis amigos y colegas, y tiendo a compararme con ellos.
+                <p>
+                    <% elsif question == 15 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Tengo una adicción al trabajo; me siento perdido si no estoy realizando cosas.
+                <p>
+                    <% elsif question == 16 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong> Muchos me consideran una persona enigmática, difícil y contradictoria, ¡y eso me gusta de mí!, soy bastante dramático y temperamental.
+                <p>
+                    <% elsif question == 17 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Tiendo a no seguir las reglas ni las expectativas porque quiero poner mi sello especial en todo lo que hago. Me cuesta participar en proyectos si no tengo el control creativo.
+                <p>
+                    <% elsif question == 18 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Tiendo a pasar bastante tiempo imaginando situaciones y conversaciones que no han ocurrido necesariamente.
+                <p>
+                    <% elsif question == 19 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Conocerme a mí mismo y ser fiel a mis necesidades emocionales han sido motivaciones muy importantes para mí.
+                <p>
+                    <% elsif question == 20 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy muy consciente de mis intuiciones, tenga o no el valor para seguirlas.
+                <p>
+                    <% elsif question == 21 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me gusta profundizar en las cosas, y estudio detenidamente los detalles hasta que lo he entendido todo lo mejor posible.
+                <p>
+                    <% elsif question == 22 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy una persona muy reservada, no dejo entrar a muchas personas en mi mundo.
+                <p>
+                    <% elsif question == 23 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Sólo teniendo la información correcta se puede tomar una decisión racional, pero, claro, la mayoría de la gente no es muy racional.
+                <p>
+                    <% elsif question == 24 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Mi familia me encuentra algo raro o excéntrico; ciertamente me han dicho que debo salir más.
+                <p>
+                    <% elsif question == 25 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy muy curioso y me gusta investigar por qué las cosas son como son; incluso las cosas obvias no son tan obvias si se miran bien.
+                <p>
+                    <% elsif question == 26 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy muy emotivo, pero no suelo demostrar mis sentimientos, a no ser a mis íntimos, e incluso a ellos, no siempre.
+                <p>
+                    <% elsif question == 27 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me siento más seguro haciendo lo que se espera de mí que obrando por mi cuenta.
+                <p>
+                    <% elsif question == 28 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Sé cuánto enredo armo yo, de modo que encuentro lógico desconfiar de lo que pretenden los demás.
+                <p>
+                    <% elsif question == 29 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Deseo fiarme de las personas, pero suelo sorprenderme desconfiando de sus motivos.
+                <p>
+                    <% elsif question == 30 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Cuando tengo que tomar una decisión importante, consulto la opinión de las personas en que confío.
+                <p>
+                    <% elsif question == 31 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me encanta viajar y descubrir diferentes tipos de comidas, personas y experiencias, ¡todo el fabuloso torbellino de la vida!
+                <p>
+                    <% elsif question == 32 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Una cosa que no soporto de ninguna manera es el aburrimiento, y procuro no aburrirme nunca, aunque me distraiga con facilidad y me disperse demasiado.
+                <p>
+                    <% elsif question == 33 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me comprometo bastante cuando estoy en una relación, pero cuando se acaba, paso a otra cosa. De hecho cuando ya no disfruto en una actividad dejo de hacerla.
+                <p>
+                    <% elsif question == 34 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy curioso y arriesgado; por lo general, soy el primero entre mis amigos en probar cualquier cosa nueva e interesante.
+                <p>
+                    <% elsif question == 35 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Tiendo a gastar más dinero del que probablemente debería y me encanta estar con gente, siempre que quieran ir donde yo voy
+                <p>
+                    <% elsif question == 36 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Soy extraordinariamente independiente y no me gusta depender de nadie para lo que necesito.
+                <p>
+                    <% elsif question == 37 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Cuando quiero a las personas las considero «mi gente» y siento la necesidad de cuidar de sus intereses, pero no siento mucha compasión por los débiles y los indecisos: la debilidad sólo atrae problemas.
+                <p>
+                    <% elsif question == 38 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Tengo una voluntad fuerte y no renuncio ni me echo atrás fácilmente. Incluso, soy capaz de violentos estallidos de cólera, pero se me pasan.
+                <p>
+                    <% elsif question == 39 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me considero un desafiador, una persona que saca a las personas de su zona de comodidad para que hagan todo lo que son capaces de hacer.
+                <p>
+                    <% elsif question == 40 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Mi sentido del humor es prosaico, incluso grosero a veces, aunque creo que la mayoría de las personas son demasiado remilgadas y sensibles.
+                <p>
+                    <% elsif question == 41 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Parece que lo que gusta de mí a las personas es que se sienten seguras a mi lado.
+                <p>
+                    <% elsif question == 42 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>No me importa estar con gente ni me importa estar solo; cualquiera de las dos cosas me va bien, siempre que esté en paz conmigo mismo.
+                <p>
+                    <% elsif question == 43 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>He encontrado un cierto equilibrio en mí vida, y no veo ningún motivo para estropearlo. Estar «cómodo» en todo el sentido de la palabra me atrae muchísimo.
+                <p>
+                    <% elsif question == 44 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Prefiero ceder antes que armar una escena. Acentúo lo positivo antes que insistir en lo negativo.
+                <p>
+                    <% elsif question == 45 %>
+                <p class="flow-text"><strong class="bold"><%= question%>. </strong>Me es fácil comprender diferentes puntos de vista y tiendo más a estar de acuerdo que en desacuerdo con las personas.
+                <p>
+                    <% end %>
+            </td>
+            <td>
+                <input id="question1<%= question%>" name="[answer<%= question%>]" type="radio" required value="1" />
+                <label for="question1<%= question%>"></label>
+
+            </td>
+            <td>
+                <input id="question2<%= question%>" name="[answer<%= question%>]" type="radio" value="2" />
+                <label for="question2<%= question%>"></label>
+            </td>
+            <td>
+                <!-- checked="checked" -->
+                <input id="question3<%= question%>" name="[answer<%= question%>]" type="radio" value="3" />
+                <label for="question3<%= question%>"></label>
+            </td>
+            <td>
+                <input id="question4<%= question%>" name="[answer<%= question%>]" type="radio" value="4" />
+                <label for="question4<%= question%>"></label>
+            </td>
+            <td>
+                <input id="question5<%= question%>" name="[answer<%= question%>]" type="radio" value="5" />
+                <label for="question5<%= question%>"></label>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<%= submit_tag "Enviar", class: 'btn btn-large blue waves-light',:id => "btnValidPsychological" %>
+<% end %>

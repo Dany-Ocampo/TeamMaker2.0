@@ -1,0 +1,17 @@
+<div style="padding-top:5%">
+    <div class="container">
+        <div class="row">
+            <div class="col l12 m12 s12 center-align" style="padding-bottom: 14px">
+                <h2 style="display: inline"><b>Panel de secciones</b></h2>
+                <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
+            </div>
+            <% current_user.sections.each do |section| %>
+            <div class="col s12 m6 l4" style="padding-top:20px" align="center">
+                <%= link_to '<i class="material-icons" style="font-size: 5rem;padding-top:40px">school</i><h4 class="center" style="margin:0;font-size: 1.4rem;">'.html_safe + section.code + '</h4>'.html_safe, home_section_path(section), class: "btn btn-default waves-effect waves-light features-black" , style: "height:200px; width:100%" %>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+</div>
+<br><br>

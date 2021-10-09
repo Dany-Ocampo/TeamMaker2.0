@@ -1,0 +1,41 @@
+<% enea = current_user.eneatype %>
+	<div class="card-panel blue lighten-4">
+		<% if current_user.eneatype.number == 1 %>
+		<h1>1. EL PERFECCIONISTA</h1>
+		<p align="justify">Al tipo de personalidad Uno lo hemos llamado el perfeccionista, porque estas personas creen tener una misión en la vida, lo que las lleva a desear mejorar el mundo de diversas formas, utilizando el grado de influencia que poseen. Se esfuerzan por superar la adversidad, sobre todo la adversidad moral, para que el espíritu humano brille y cambie las cosas. Trabajan por valores elevados, incluso a costa de grandes sacrificios personales.</p>
+
+		<%elsif enea.number == 2 %>
+		<h1>2. EL COLABORADOR</h1>
+		<p align="justify">Hemos llamado el colaborador a este tipo porque las personas que pertenecen a él son o bien	auténticamente serviciales con los demás o, cuando están menos sanas, les interesa muchísimo considerarse como tales. Ser generosas y desvivirse por los demás las hace pensar que su forma de ser es la más preciosa y la que tiene más sentido. El cariño e interés que	sienten, y el verdadero bien que hacen, les alegra el corazón y hace que se sientan valiosas.	Los Dos están muy interesados en lo que ellos consideran las cosas realmente buenas de la	vida: el amor, la intimidad y la comunicación, la generosidad, la familia y la amistad.</p>
+
+		<%elsif enea.number == 3 %>
+		<h1>3. EL TRIUNFADOR</h1>
+		<p align="justify">Hemos llamado el triunfador a este tipo de personalidad porque cuando los tres están sanos, son verdaderamente capaces y triunfan en muchos aspectos tic la vida. Son las «estrellas» de la naturaleza humana, y la gente suele admirarlos por su estilo y sus logros personales. Saben lo agradable que es desarrollarse y aportar al mundo sus capacidades. También disfrutan motivando a los demás a consecuciones personales mayores de las que se creen capaces de realizar. Encarnan lo mejor de una cultura y los demás ven reflejados en ellos sus esperanzas y sueños.</p>
+
+		<%elsif enea.number == 4 %>
+		<h1>4. EL ARTISTA</h1>
+		<p align="justify">Hemos llamado el artista a este tipo porque los Cuatro mantienen su identidad considerándose fundamentalmente diferentes a los demás. Creen ser distintos a los demás seres humanos y que, por lo tanto, nadie puede comprenderlos ni amarlos lo suficiente. Suelen pensar que poseen talentos únicos, dones especiales, fuera de serie, pero también que tienen desventajas o defectos únicos. Más que cualquier otro tipo, los Cuatro conocen muy bien sus diferencias y deficiencias personales y se centran en ellas.</p>
+
+		<%elsif enea.number == 5 %>
+		<h1>5 EL SABIO</h1>
+		<p align="justify">Hemos llamado el investigador a este tipo de personalidad porque, más que cualquiera de los demás tipos, los Cinco desean descubrir por qué las cosas son como son. Desean entender por qué funciona el mundo, ya se trate del cosmos, el mundo microscópico, los reinos animal, vegetal y mineral o el mundo interior de su imaginación. Siempre están investigando, haciendo preguntas y ahondando en las cosas. No aceptan opiniones ni doctrinas recibidas; sienten una fuerte necesidad de examinar por sí mismos la verdad de todas las suposiciones.</p>
+
+		<%elsif enea.number == 6 %>
+		<h1>6. EL LEAL</h1>
+		<p align="justify">Hemos llamado leal a este tipo de personalidad porque, de todos ellos, los Seis son los más leales a sus amigos y fieles a sus creencias. Se hundirán con el barco y perseverarán en las relaciones de todas clases mucho más tiempo que la mayoría de los otros tipos. También son leales a ideas, sistemas y credos, incluso a la creencia de que hay que poner en duda o desafiar toda idea o autoridad. En realidad, no todos los Seis se llevan bien con las cosas como están; sus ideas podrían ser rebeldes y antiautoritaristas e incluso revolucionarias. En todo caso, van a luchar por sus creencias con más fiereza con la que luchan por sí mismos, y defenderán su comunidad o familia con más tenacidad que con la que se defienden ellos.</p>
+
+		<%elsif enea.number == 7 %>
+		<h1>7. EL ENTUSIASTA</h1>
+		<p align="justify">Hemos llamado entusiastas, este tipo de personalidad porque los Siete se entusiasman por casi todo lo que les atrae la atención. Asisten a la vida con curiosidad, optimismo y espíritu de aventura, como niños en una tienda de caramelos que miran el mundo con ilusionada expectación por todas las cosas buenas que van a experimentar. Son osados y alegres, y van en pos de lo que desean en la vida con animada resolución. Poseen una cualidad cuya mejor definición es la palabra yidish chutzpah, algo así como descaro.</p>
+
+		<%elsif enea.number == 8 %>
+		<h1>8. EL DESAFIADOR</h1>
+		<p align="justify">Hemos llamado el desafiador a este tipo de personalidad porque, más que ningún otro tipo, a los Ocho les encanta aceptar retos así como dar a otros la oportunidad de que los desafíen a superarse de alguna manera. Tienen carisma, además de las capacidades físicas y psíquicas para convencer a la gente de que los siga en todo tipo de empresas, ya se trate de iniciar un negocio, reconstruir una ciudad, llevar una casa, hacer una guerra o firmar la paz. Los Ocho tienen una fuerza de voluntad y una vitalidad enormes, y se sienten más vivos cuando ejercen esas capacidades en el mundo. Emplean su abundante energía para efectuar cambios en su entorno, para dejar su sello en él, pero también para impedir que el ambiente u otras personas les hagan daño a ellos y a sus seres queridos. A temprana edad comprenden que eso requiere fuerza, voluntad, perseverancia y aguante, cualidades que desarrollan ellos y buscan en otros.</p>
+
+		<%elsif enea.number == 9 %>
+		<h1>9. EL MEDIADOR</h1>
+		<p align="justify">Hemos llamado el mediador al tipo Nueve porque ningún tipo se dedica más a la búsqueda de paz interior y exterior para sí mismo y para los demás. Suelen ser personas espirituales que anhelan la conexión con el cosmos y con los demás. Trabajan por mantener su paz mental así como por establecer la paz y la armonía en su mundo. Las preocupaciones que encontramos en el Nueve son las fundamentales de todo trabajo interior: permanecer despiertos frente a estar dormidos a nuestra verdadera naturaleza, paz contra sufrimiento, unión contra separación.</p>
+	<% end %>
+</div>
+			
+				

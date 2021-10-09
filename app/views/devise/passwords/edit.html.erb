@@ -1,0 +1,33 @@
+<div class="container" style="padding-top:8%">
+    <div class="row center">
+        <div class="col l6 m8 s10 offset-l3 offset-m2 offset-s1">
+            <div class="card-panel z-depth-5 features-black">
+
+                <%= link_to "<h1 style='margin-top:-100px;font-size: 4.0rem;'>TeamMaker</h1>".html_safe, root_path, :class => "Motion white-text"%>
+                <p class="flow-text thin white-text">Cambio de contraseña</p>
+
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= devise_error_messages! %>
+                <%= f.hidden_field :reset_password_token %>
+
+                <div class="input-field">
+                    <%= f.label :password, "Nueva contraseña" %><br />
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> caracteres mínimos)</em><br />
+                    <% end %>
+                    <%= f.password_field :password, autofocus: true, autocomplete: "off", :style => "color:white" %>
+                </div>
+
+                <div class="input-field">
+                    <%= f.label :password_confirmation, "Confirmar nueva contraseña" %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "off" , :style => "color:white"%>
+                </div>
+
+                <div class="actions">
+                    <%= f.submit "cambiar", :class=> "btn btn-default" , :style => "background-color:#3d5afe"%>
+                </div>
+                <% end %>
+            </div>
+            <%= render "devise/shared/links" %>
+        </div>
+    </div>

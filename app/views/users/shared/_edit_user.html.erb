@@ -1,0 +1,56 @@
+<div class="modal-content">
+    <h3>Editar usuario</h3>
+    <%= form_for(user) do |f| %>
+    <!-- Inicio de form -->
+    <div class="field">
+        <%= f.label :email, "Correo" %>
+        <%= f.text_field :email, autofocus: true, class: "validate", placeholder:"ejemplo@correo.cl"  %>
+    </div>
+    <div class="field">
+        <%= f.label :name, "Nombres" %>
+        <%= f.text_field :name, autofocus: true, class: "validate", required: "true", placeholder:"Tammy"  %>
+    </div>
+    <div class="field">
+        <%= f.label :surname, "Apellidos" %>
+        <%= f.text_field :surname, autofocus: true, class: "validate", required: "true", placeholder:"Lagos"  %>
+    </div>
+    <%= label :rol, "Rol" %>
+    <div class="input-field">
+        <select name="user[rol]" class="browser-default">
+            <option <%if f.object.rol == 3 %>selected<% end %> value=3>Alumno</option>
+            <option <%if f.object.rol == 2 %>selected<% end %> value=2>Ayudante</option>
+            <% if current_user.rol == 0 %><option <%if f.object.rol == 1 %>selected<% end %> value=1>Profesor</option><% end %>
+        </select>
+    </div>
+    <br>
+    <div class="field">
+        <%= f.label "Sección" %>
+        <div class="row" style="margin-bottom: 20px;">
+            <% @sections.each do |s| %>
+            <div class="col s4 m4 l2">
+                <div class="field">
+                    <p>
+                        <input id="EditSection<%= user.id %><%= s.id%>" name="sections[]" type="checkbox" value="<%= s.id%>" <% user.sections.each do |u| %> <% if u.id == s.id %> checked=1 <% end %> <% end %> />
+                        <label for="EditSection<%= user.id %><%= s.id%>"><%= s.code%></label>
+                    </p>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="switch field">
+        <%= label :status, "Estado" %><br>
+        Suspendido
+        <label>
+            <%= f.check_box :status%>
+            <span class="lever"></span>
+        </label>
+        Activo
+    </div>
+</div>
+<div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect btn red left">Volver</a>
+    <%= f.submit 'Actualizar usuario', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + user.email.to_s + "? ')",class: "btn right" %>
+    <% end %>
+    <!-- termino del form-->
+</div>

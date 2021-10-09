@@ -1,0 +1,59 @@
+<div class="card-panel blue lighten-2" style="padding: 10px 24px;">
+    <strong class="white-text flow-text"><b>INSTRUCCIONES: </b></strong>
+    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;">
+        Para corroborar la respuesta anterior elija el par de frases que <b style="color:#005396;">más lo representa.</b>
+    </p>
+</div>
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Preguntas</th>
+            <th style="text-align: center;">Elección</th>
+        </tr>
+    </thead>
+    <%= form_tag({:action => "create"}) do %>
+    <tbody>
+        <% for question in 1..9%>
+        <tr id="pregunta<%= question%>">
+            <td style="padding: 0px 20px;">
+
+                <%if question == 1 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Tranquilo / Armonía
+                <p>
+                    <% elsif question == 2 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Poderoso / Admiración
+                <p>
+                    <% elsif question == 3 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Estimulado / Compartir
+                <p>
+                    <% elsif question == 4 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Seguro / Seguridad
+                <p>
+                    <% elsif question == 5 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Desapegado / Respeto
+                <p>
+                    <% elsif question == 6 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Conectado / Amor
+                <p>
+                    <% elsif question == 7 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Destacado / Reconocimiento
+                <p>
+                    <% elsif question == 8 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Único / Comprensión
+                <p>
+                    <% elsif question == 9 %>
+                <p><strong class="bold"><%= question%>. </strong>Sentirme Perfecto / Valoración
+                <p>
+                    <% end %>
+            </td>
+            <td style="text-align: center;">
+                <input id="<%= 10 - question%>" name="answer" type="radio" required value="<%= 10 - question%>" />
+                <label style="padding-left: 20px;" for="<%= 10 - question%>"></label>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<%= submit_tag "Enviar", class: 'right btn btn-large blue waves-light',:id => "btnValidPsycho1" %>
+<% end %>

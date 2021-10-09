@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "app",
+            "image": "aurorawr/new-teammaker",
+            "hostname": "app",
+            "essential": true,
+            "memory": 128
+        },
+        {
+            "name": "db",
+            "image": "postgres",
+            "hostname": "db",
+            "essential": true,
+            "memory": 128,
+            "environment": [
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "tm1234"
+                }
+            ]
+        },
+        {
+            "name": "web",
+            "image": "aurorawr/aurorapps-nginx",
+            "hostname": "web",
+            "essential": true,
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["app"]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+<div class="container" style="width: 90%;padding-top:2%">
+    <div class="row">
+        <div class="col s12">
+            <h3 style="display: inline"><b>Test: </b></h3>
+            <h3 class="sub-titulo" style="display: inline; color:#2196F3 !important;">Personalidad
+                <% if current_user.test_count == 1 || current_user.test_count == 3 %>
+                1/2
+                <% elsif current_user.test_count == 2 || current_user.test_count == 4 %>
+                2/2
+                <% elsif current_user.test_count == 5 %>
+                Final
+                <% end %>
+            </h3>
+            <hr>
+            <br>
+            <% if current_user.test_count == 1 || current_user.test_count == 3 %>
+            <%= render :partial => "psychological/shared/test_1" %>
+            <% elsif current_user.test_count == 2 || current_user.test_count == 4 %>
+            <%= render :partial => "psychological/shared/test_2" %>
+            <% elsif current_user.test_count == 5 %>
+            <%= render :partial => "psychological/shared/test_3" %>
+            <% end %>
+        </div>
+    </div>
+</div>

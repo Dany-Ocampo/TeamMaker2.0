@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "#{@sectionName} complaints") do |sheet|
+    sheet.add_row ["Grupo", "Complaint"]
+    @data.each do |group_number, complaint|
+        sheet.add_row [group_number, complaint]
+    end
+end

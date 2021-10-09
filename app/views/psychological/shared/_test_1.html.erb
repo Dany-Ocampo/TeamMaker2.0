@@ -1,0 +1,58 @@
+<div class="card-panel blue lighten-2" style="padding: 10px 24px;">
+    <strong class="white-text flow-text"><b>INSTRUCCIONES: </b></strong>
+    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;">
+        Elija <b style="color:#005396;">solo una </b>afirmación que lo represente mejor.
+    </p>
+</div>
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Preguntas</th>
+            <th style="text-align: center;">Elección</th>
+        </tr>
+    </thead>
+    <%= form_tag({:action => "create"}) do %>
+    <tbody>
+        <% for question in 1..9%>
+        <tr id="pregunta<%= question%>">
+            <td style="padding: 0px 20px;">
+                <%if question == 2 %>
+                <p><strong class="bold"><%= question%>. </strong>Me gusta ser generoso. ¿Cómo no ayudar a los que puedan necesitarme?.
+                <p>
+                    <% elsif question == 3 %>
+                <p><strong class="bold"><%= question%>. </strong>Los logros se alcanzan haciendo. El éxito es de los esforzados.
+                <p>
+                    <% elsif question == 4 %>
+                <p><strong class="bold"><%= question%>. </strong>Aunque muchas veces se sufre, la vida es sentir intensamente.
+                <p>
+                    <% elsif question == 5 %>
+                <p><strong class="bold"><%= question%>. </strong>Hay que observar, pensar, saber.
+                <p>
+                    <% elsif question == 6 %>
+                <p><strong class="bold"><%= question%>. </strong>Prevenir es fundamental para no tener sorpresas desagradables.
+                <p>
+                    <% elsif question == 7 %>
+                <p><strong class="bold"><%= question%>. </strong>No disfrutar la vida es como estar muerto.
+                <p>
+                    <% elsif question == 8 %>
+                <p><strong class="bold"><%= question%>. </strong>Lo fortaleza y la intensidad juntas, son imparables.
+                <p>
+                    <% elsif question == 9 %>
+                <p><strong class="bold"><%= question%>. </strong>No hay como la armonía.
+                <p>
+                    <% elsif question == 1 %>
+                <p><strong class="bold"><%= question%>. </strong>Uno debe hacer las cosas correctamente, la perfección en cada detalle es importante.
+                <p>
+                    <% end %>
+            </td>
+            <td style="text-align: center;">
+                <input id="<%= question%>" name="answer" type="radio" required value="<%= question%>" />
+                <label style="padding-left: 20px;" for="<%= question%>"></label>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<%= submit_tag "Corroborar", class: 'right btn btn-large blue waves-light',:id => "btnValidPsycho1" %>
+<% end %>

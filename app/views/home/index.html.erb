@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+	<% if current_user.rol == 0 %>
+		<%= render :partial => "home/shared/home_admin" %>
+	<% elsif current_user.rol == 1 %>
+		<%= render :partial => "home/shared/home_teacher" %>
+	<% elsif current_user.rol == 2 %>
+		<%= render :partial => "home/shared/home_assistant" %>
+	<% elsif current_user.rol == 3 %>
+    <%= render :partial => "sections/my_sections" %>
+	<% end %>
+<%else%>
+  <%= render :partial => "home/shared/home" %>
+<% end %>

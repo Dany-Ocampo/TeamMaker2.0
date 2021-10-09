@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Test") do |sheet|
+    sheet.add_row ["Grupo", "Nombres", "Apellidos", "Género", "Edad", "Eneatipo"]
+    @groups.each do |group_number, members|
+        members.each do |member|
+            gender = member.user.sex == 0 ? "F" : "M"
+            sheet.add_row [group_number, member.user.name, member.user.surname, gender, member.user.age, member.user.eneatype.number]
+        end
+    end
+end

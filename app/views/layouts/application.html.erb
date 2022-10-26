@@ -40,7 +40,7 @@
         </script>
         </div>
         <% end %>
-        <% if user_signed_in? && current_user.rol == 0 && !current_page?(root_path) && !current_page?(usuarios_path) && !current_page?(sections_path)  %>
+        <% if user_signed_in? && current_user.rol == 0 && !current_page?(root_path) && !current_page?(usuarios_path) && !current_page?(courses_path)  %>
         <main style="background-color:#f1f1f1">
             <% else %>
             <main>
@@ -60,6 +60,3 @@
     </body>
 
 </html>
-
-
-<!--<div class="col l12 m12 s12" style="padding-top: 48px;padding-bottom: 48px">-->

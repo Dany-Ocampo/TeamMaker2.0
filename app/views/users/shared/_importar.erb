@@ -1,3 +1,7 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+
 <%= form_tag import_users_path, multipart: true do %>
   <div class="modal-content" style="padding: 0px 24px;">
     <h5>Importar usuarios</h5>
@@ -13,7 +17,7 @@
             <th style="padding: 5px 5px;">name</th>
             <th style="padding: 5px 5px;">surname</th>
             <th style="padding: 5px 5px;">password</th>
-            <th style="padding: 5px 5px;">section</th>
+            <th style="padding: 5px 5px;">course</th>
           </tr>
         </thead>
 
@@ -32,6 +36,27 @@
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
           </tr>
+          <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -39,21 +64,20 @@
     <div class="file-field input-field">
       <div class="row" href="#" style="margin-bottom: 0px;">
         <div class="col s12 l2">
-          <div class="btn gris3">
+          <div class="btn gris3 right">
           <i class="material-icons" style="font-size:2rem">file_upload</i>
           <%= file_field_tag :file, class:'align:center' %>
           </div>
         </div>
         <div class="col s12 l10">
-          <input class="file-path validate" placeholder="Seleccionar .CSV" />
+          <input class="file-path validate" placeholder="Seleccionar archivo .CSV" />
         </div>
       </div>    
     </div>
-
-
   </div>
+
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-red btn red left">Volver</a>
-    <input type="submit" name="commit" value="importar" data-disable-with="importar" class="waves-effect btn right" style="visibility: visible;">
+  <!--  <a href="#!" class="modal-action modal-close waves-effect waves-red btn red left">Volver</a>  -->
+    <input type="submit" name="commit" value="importar" data-disable-with="importar" class="waves-effect btn left" style="visibility: visible;">
   </div>
  <% end %>

@@ -9,13 +9,13 @@ class SocialController < ApplicationController
 
   def test
     if user_signed_in? && current_user.rol == 3 && current_user.accept_model == true
-      my_section = current_user.sections.first.code
+      my_course = current_user.courses.first.code
 
       if current_user.tests.find_by(kind: 2, answered: true).present?
         if current_user.tests.find_by(kind: 3, answered: true).present?
           redirect_to test_social_path, notice: "tests ya respondidos"
         else
-          allPartners = User.joins(:sections).where(sections: { code: my_section }, rol: 3).where.not(id: current_user.id)
+          allPartners = User.joins(:courses).where(courses: { code: my_course }, rol: 3).where.not(id: current_user.id)
           answers = current_user.tests.find_by(kind: 2, answered: true).answers
           existA = 0
           existB = 0
@@ -43,7 +43,7 @@ class SocialController < ApplicationController
           end
         end
       else  
-        @partners = User.joins(:sections).where(sections: { code: my_section }, rol: 3).where.not(id: current_user.id)
+        @partners = User.joins(:courses).where(courses: { code: my_course }, rol: 3).where.not(id: current_user.id)
       end
     else
       redirect_to root_path
@@ -52,7 +52,7 @@ class SocialController < ApplicationController
 
   def create
    if user_signed_in? && current_user.rol == 3 && current_user.accept_model == true
-      my_section = current_user.sections.first.code
+      my_course = current_user.courses.first.code
 
       if current_user.tests.find_by(kind: 2, answered: true).present?
         test_now = current_user.tests.find_by(kind: 3)

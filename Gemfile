@@ -80,3 +80,5 @@ gem "rack", ">= 2.2.3"
 gem "faker"
 gem 'caxlsx'
 gem 'caxlsx_rails'
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?

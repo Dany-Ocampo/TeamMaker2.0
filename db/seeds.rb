@@ -8,7 +8,7 @@
 
 require 'faker'
 
-=begin
+
 # Carreras
 inst = Institution.create(name: "Universidad de Santiago de Chile")
 
@@ -31,25 +31,25 @@ Program.create!(name: "Ingeniería de Ejecución en Industria", institution: ins
 Program.create!(name: "Ingeniería de Ejecución en Mecánica", institution: inst) #16
 Program.create!(name: "Ingeniería de Ejecución en Metalurgia", institution: inst) #17
 Program.create!(name: "Ingeniería de Ejecución en Química", institution: inst) #18
-=end
 
 programs = Program.limit(10)
 
 # Secciones
 subject = Subject.create!(name: "Gobierno y Gestión usando NIST", code: "GGNIST")
 #subject = Subject.last
-#type = SectionType.find(3)
-type = SectionType.last
-section = Section.create!(subject: subject, section_type: type, code: 'TEST-1', semester: 2, year: 2017)
+#type = CourseType.find(3)
+type = CourseType.create!(name: "Cátedra")
+type1 = CourseType.create!(name: "Laboratorio")
+course = Course.create!(subject: subject, course_type: type, code: 'TEST-1', semester: 2, year: 2017)
 
-(1..172).each do |index|
+(1..20).each do |index|
     name = Faker::Name.first_name
     surname = Faker::Name.last_name
     email = name + surname + "@mail.com"
     gender = [0, 1].sample
     age = rand(25..50)
     user = User.create!(email: email,name: name ,surname: surname, rol: 3 ,status: true ,password: '111111',password_confirmation: '111111', sex: gender, age: age,  accept_model: true)
-    user.sections << section
+    user.courses << course
     user.programs << programs.sample
     user.save
     eneatype = rand(1..9)
@@ -62,7 +62,7 @@ section = Section.create!(subject: subject, section_type: type, code: 'TEST-1', 
             Answer.create(test: test, element_kind: eneatype, number: 1, answer: eneatype)
         else
             type_test = i == 2 ? 1 : 0
-            randomUsers = [1..172].sample(5)
+            randomUsers = [1..20].sample(5)
             randomUsers.each do |u|
                 Answer.create(test: test  , element_kind: type_test, number: u, answer: 1)
                 Answer.create(test: test  , element_kind: type_test, number: u, answer: 0)
@@ -71,18 +71,17 @@ section = Section.create!(subject: subject, section_type: type, code: 'TEST-1', 
     end
 end
 
-=begin
+
 # Coordinadores
 coord = program.users.create!(email: 'coordinador@mail.com',name: 'Juan' ,surname: 'Gómez' , rol: 0 ,status: true ,password: '111111',password_confirmation: '111111')
-coord.sections << section
+coord.courses << course
 # Profesores
 profe = program.users.create!(email: 'profesor@mail.com',name: 'Juan' ,surname: 'Araya' , rol: 1 ,status: true ,password: '111111',password_confirmation: '111111')
-profe.sections << section
+profe.courses << course
 # Ayudantes
 ayu = program.users.create!(email: 'ayudante@mail.com',name: 'Emma' ,surname: 'Watson' , rol: 2 ,status: true ,password: '111111',password_confirmation: '111111')
-ayu.sections << section
+ayu.courses << course
 # Estudiantes
 estu = program.users.create!(email: 'estudiante@mail.com',name: 'Franco' ,surname: 'Gotelli' , rol: 3 ,status: true ,password: '111111',password_confirmation: '111111')
-estu.sections << section
+estu.courses << course
 
-=end

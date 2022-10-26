@@ -55,22 +55,22 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
     t.index ["user_id"], name: "index_programs_users_on_user_id"
   end
 
-  create_table "section_types", force: :cascade do |t|
+  create_table "course_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sections", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.bigint "subject_id", null: false
-    t.bigint "section_type_id", null: false
+    t.bigint "course_type_id", null: false
     t.string "code"
     t.integer "year"
     t.integer "semester"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["section_type_id"], name: "index_sections_on_section_type_id"
-    t.index ["subject_id"], name: "index_sections_on_subject_id"
+    t.index ["course_type_id"], name: "index_courses_on_course_type_id"
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -90,14 +90,14 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
-  create_table "user_sections", force: :cascade do |t|
+  create_table "user_courses", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "section_id", null: false
+    t.bigint "course_id", null: false
     t.integer "group_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["section_id"], name: "index_user_sections_on_section_id"
-    t.index ["user_id"], name: "index_user_sections_on_user_id"
+    t.index ["course_id"], name: "index_user_courses_on_course_id"
+    t.index ["user_id"], name: "index_user_courses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -131,9 +131,9 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
   add_foreign_key "programs", "institutions"
   add_foreign_key "programs_users", "programs"
   add_foreign_key "programs_users", "users"
-  add_foreign_key "sections", "section_types"
-  add_foreign_key "sections", "subjects"
+  add_foreign_key "courses", "course_types"
+  add_foreign_key "courses", "subjects"
   add_foreign_key "tests", "users"
-  add_foreign_key "user_sections", "sections"
-  add_foreign_key "user_sections", "users"
+  add_foreign_key "user_courses", "courses"
+  add_foreign_key "user_courses", "users"
 end

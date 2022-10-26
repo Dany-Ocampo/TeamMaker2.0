@@ -1,0 +1,90 @@
+<div class="container" style="padding-top:5%">
+    <div class="row">
+        <div class="col s12">
+            <% if @course.errors.any? %>
+            <div class="card-panel card-fix red lighten-4 red-text center-align">
+                <i class="material-icons medium">mood_bad</i>
+                <h5 class="h5-fix"><b>Ups!, algo no salió bien ... </b></h5>
+                <p style="margin: 4px;">- NO SE PUDO CREAR EL NUEVO CURSO -</p>
+            </div>
+            <% end %>
+            <% if notice %>
+            <div class="card-panel card-fix green lighten-4 green-text center-align">
+                <i class="material-icons medium ">mood</i>
+                <h5 class="h5-fix"><b>Todo bien ... </b></h5>
+                <p class="alert" style="margin: 4px;">- <%= notice %> -</p>
+            </div>
+            <% end %>
+            <% if alert %>
+            <div class="card-panel card-fix red lighten-4 red-text center-align">
+                <i class="material-icons medium">mood_bad</i>
+                <h5 class="h5-fix"><b>Ups!, algo no salió bien ... </b></h5>
+                <p style="margin: 4px;">- NO SE PUDO ACTUALIZAR EL CURSO -</p>
+            </div>
+            <% end %>
+            <h3 style="display: inline"><b>Cursos</b></h3>
+            <a class="right btn-floating btn-large waves-effect waves-light btn green accent-4 tooltipped modal-trigger" href="#nuevoCurso" data-position="top" data-delay="50" data-tooltip="Nuevo curso" style="margin-left:1rem"><i class="material-icons" style="font-size:2.4rem">group_add</i></a>
+            <hr>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th class="center">Curso</th>
+                        <th class="center">Semestre</th>
+                       <!--<th class="center">Asignatura</th> -->
+                        <th class="center">Tipo</th>
+                        <th class="center">Estudiantes</th>
+                        <th class="center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% n = 1 %>
+                    <% @courses.each do |course| %>
+
+                    <!-- Modal Ver Curso -->
+                    <div id="verCurso<%= course.id %>" class="modal modal-fixed-footer col l4 offset-l2">
+                        <%= render :partial => "courses/shared/show_course", locals: {course: course} %>
+                    </div>
+                    <!-- Modal Editar Curso -->
+                    <div id="editarCurso<%= course.id %>" class="modal modal-fixed-footer col l4 offset-l2" style="height: 360px;">
+                        <%= render :partial => "courses/shared/edit_course", locals: {course: course} %>
+                    </div>
+                    <% course.users.where(rol: 3).each do |s| %>
+                    <div id="verEstudiante<%= s.id%>" class="modal">
+                        <%= render :partial => "users/shared/show_user", locals: {user: s} %>
+                    </div>
+                    <% end %>
+
+                    <tr>
+                        <td><%= n %></td>
+                        <td class="center">
+                            <%= course.code %>
+                        </td>
+                        <td class="center">
+                            <%= course.semester.to_s + '/' + course.year.to_s %>
+                        </td>
+                       <!-- <td class="center">
+                            <%= course.subject.name %> -->
+                        </td>
+                        <td class="center">
+                            <%= course.course_type.name %>
+                        </td>
+                        <td class="center">
+                            <%= course.users.where(rol: 3).count %>
+                        </td>
+                        <td class="center">
+                            <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#verCurso<%= course.id%>" style="background-color:#2196f3; border-color:#0d8aee"><i class="material-icons">people_outline</i></a>
+                            <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarCurso<%= course.id%>" style="background-color:#ff9800; border-color:#e68900"><i class="material-icons">mode_edit</i></a>
+                            <%= link_to '<i class="material-icons">delete_forever</i>'.html_safe, course, method: :delete, data: { confirm: "¿Estás seguro que deseas eliminar este curso?" },class: "btn-floating waves-effect waves-light red" %>
+                        </td>
+                    </tr>
+                    <% n = n + 1%>
+                    <% end %>
+                </tbody>
+            </table>
+            <div id="nuevoCurso" class="modal modal-fixed-footer col l4 m6 offset-l2 offset-m2" style=" height: 360px;">
+                <%= render :partial => "courses/shared/new_course"%>
+            </div>
+        </div>
+    </div>
+</div>

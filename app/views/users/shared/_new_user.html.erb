@@ -1,5 +1,9 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+</div>
+
 <div class="modal-content">
-    <h4>Nuevo usuario</h4>
+    <h3><b>Nuevo usuario</h3></b>
 
     <%= form_for(@user) do |f| %>
     <div class="field">
@@ -15,12 +19,23 @@
         <%= f.text_field :surname, autofocus: true, class: "validate", required: "true", placeholder:"Lagos" %>
     </div>
     <div class="field">
+        <%= f.label :age, "Edad" %>
+        <%= f.number_field :age, autofocus: true, class: "validate", required: "true", placeholder:"23" %>
+    </div>
+    <div class="field">
         <%= f.label :password, "Contraseña" %>
         <%= f.password_field :password, autocomplete: "off", class: "validate", required: "true", placeholder:"seis caracteres mínimo." %>
     </div>
     <div class="field">
         <%= f.label :password_confirmation, "Confirmar contraseña" %>
         <%= f.password_field :password_confirmation, autocomplete: "off", class: "validate",required: "true", placeholder:"Vuelva a ingresar la contraseña." %>
+    </div>
+        <%= label :sex, "Género" %>
+    <div class="input-field">
+        <select name="user[sex]" class="browser-default">
+            <option value=0>Masculino</option>
+            <option value=1>Femenino</option>
+        </select>
     </div>
     <%= label :rol, "Rol" %>
     <div class="input-field">
@@ -30,7 +45,8 @@
             <% if current_user.rol == 0 %><option value=1>Profesor</option><% end %>
         </select>
     </div>
-    <%= label :program_id, "Programa" %>
+
+    <%= label :program_id, "Carrera" %>
     <div class="field">
         <select name="user[program_id]" class="browser-default">
             <% @programs.each do |program| %>
@@ -40,23 +56,23 @@
     </div>
     <br>
     <div class="field">
-        <%= f.label "Sección" %>
+        <%= f.label "Curso" %>
         <div class="row">
             <% if current_user.rol == 0 %>
-            <% @sections.each do |s| %>
+            <% @courses.each do |s| %>
             <div class="col s4 m4 l2">
                 <div class="field" class: "validate" , required: "true">
-                    <p><input id="NewSection<%= s.id%>" name="sections[]" type="checkbox" value="<%= s.id%>" />
-                        <label for="NewSection<%= s.id%>"><%= s.code%></label></p>
+                    <p><input id="NewCourse<%= s.id%>" name="courses[]" type="checkbox" value="<%= s.id%>" />
+                        <label for="NewCourse<%= s.id%>"><%= s.code%></label></p>
                 </div>
             </div>
             <% end %>
-            <% elsif current_user.rol == 1 %>
+            <% elsif current_user.rol == 1 || current_user.rol == 2 %>
             <div class="col s4 m4 l2">
                 <div class="field">
                     <p>
-                        <input id="NewSection<%= @seccion.id%>" name="sections[<%= @seccion.id%>]" type="radio" value="<%= @seccion.id%>" checked />
-                        <label for="NewSection<%= @seccion.id%>"><%= @seccion.code%></label>
+                        <input id="NewCourse<%= @curso.id%>" name="courses[<%= @curso.id%>]" type="radio" value="<%= @curso.id%>" checked />
+                        <label for="NewCourse<%= @curso.id%>"><%= @curso.code%></label>
                     </p>
                 </div>
             </div>
@@ -74,7 +90,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect left btn red ">Volver</a>
-    <%= f.submit 'Crear usuario', :class  => "btn right" %>
+    <%= f.submit 'Crear usuario', :class  => "btn left" %>
     <% end %>
 </div>

@@ -5,24 +5,24 @@
             <% if alert %>
             <div class="card-panel card-fix red lighten-4 red-text center-align">
                 <i class="material-icons medium">mood_bad</i>
-                <h5 class="h5-fix"><b>Ups!, algo no salio bien ... </b></h5>
+                <h5 class="h5-fix"><b>¡Ups! Algo no salió bien ... </b></h5>
                 <p style="margin: 4px;"><b> <%= alert %> </b></p>
             </div>
             <% elsif notice %>
             <div class="card-panel card-fix green lighten-4 green-text center-align">
                 <i class="material-icons medium ">mood</i>
-                <h5 class="h5-fix"><b>Todo bien ... </b></h5>
+                <h5 class="h5-fix"><b>¡Todo bien! </b></h5>
                 <p class="alert" style="margin: 4px;"> <%= notice %> </p>
             </div>
             <% end %>
 
-            <h2 style="display: inline"><b>Buscador de:</b></h2>
+            <h2 style="display: inline"><b>Buscador de: </b></h2>
             <h3 class="sub-titulo" style="display: inline; color:#999999"> Usuarios</h3>
             <a class="right btn-floating btn-large waves-effect waves-light btn purple darken-3 accent-4 tooltipped modal-trigger" href="#importar" data-position="top" data-delay="50" data-tooltip="Importar estudiantes" style="margin-left: 10px;"><i class="material-icons" style="font-size:2.4rem;">group_add</i></a>
             <a class="right btn-floating btn-large waves-effect waves-light btn green accent-4 tooltipped modal-trigger" href="#nuevoUsuario" data-position="top" data-delay="50" data-tooltip="Nuevo usuario"><i class="material-icons" style="font-size:2.4rem;">person_add</i></a>
             <div class="fixed-action-btn horizontal">
-                <a class="btn-floating btn-large black tooltipped" data-position="top" data-delay="50" data-tooltip="Paginación">
-                    <i class="large material-icons">description</i>
+                <a class="btn-floating btn-large black tooltipped" data-position="top" data-delay="50" data-tooltip="Usuarios por página">
+                    <i class="large material-icons">P</i>
                 </a>
                 <ul>
                     <li> <%= link_to '<p style="line-height:0%;font-size: 20px;text-align: center;">5</p>'.html_safe, usuarios_path(:per_page => 5),:onchange => "if(this.value){window.location='?per_page='+this.value;}",class: "btn-floating blue lighten-2" %></li>
@@ -40,8 +40,8 @@
                             <%= select_tag :search_rol, options_for_select([['Estudiante','3'],['Ayudante','2'], ['Profesor','1']], params[:search_rol]), class: "form-control", :prompt => 'Ninguno'  %>
                         </div>
                         <div class="field col l4 s12">
-                            <%= label :search_section, "Sección" %>
-                            <%= select_tag :search_section, options_for_select(@sections.map { |obj| obj['code'] }, params[:search_section]), class: "form-control", :prompt => 'Ninguna' %>
+                            <%= label :search_course, "Curso" %>
+                            <%= select_tag :search_course, options_for_select(@courses.map { |obj| obj['code'] }, params[:search_course]), class: "form-control", :prompt => 'Ninguno' %>
                         </div>
                         <div class="field col l4 s12">
                             <%= label :search_status, "Estado" %>
@@ -72,10 +72,12 @@
             <table class="striped responsive-table">
                 <thead>
                     <tr>
+                        <th>Nombre(s)</th>
+                        <th>Apellido(s)</th>
                         <th>Correo</th>
-                        <th>Sección</th>
+                        <th>Curso</th>
                         <th>Rol</th>
-                        <th>Estado</th>
+                       <!-- <th>Estado</th> -->
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -91,12 +93,14 @@
                     </div>
 
                     <tr <%if user.status == false%> style="color:#F44336;" <% end %>>
+                        <td><%= user.name %></td>
+                        <td><%= user.surname %></td>
                         <td><%= user.email %></td>
                         <td>
-                            <p class="truncate" style="max-width: 12ch;" title="<% user.sections.each do |h| %><%= h.code %><% if h != user.sections.last %>, <% end %><% end %>">
-                                <% user.sections.each do |h| %>
+                            <p class="truncate" style="max-width: 12ch;" title="<% user.courses.each do |h| %><%= h.code %><% if h != user.courses.last %>, <% end %><% end %>">
+                                <% user.courses.each do |h| %>
                                 <%= h.code %>
-                                <% if h != user.sections.last %>
+                                <% if h != user.courses.last %>
                                 ,
                                 <% end %>
                                 <% end %>
@@ -115,7 +119,7 @@
                             No definido
                             <% end %>
                         </td>
-                        <td>
+                        <!--  <td>
                             <% if user.status == true %>
                             Activo
                             <% elsif user.status == false %>
@@ -123,7 +127,7 @@
                             <% else %>
                             No definido
                             <% end %>
-                        </td>
+                        </td> -->
                         <td>
                             <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#verUsuario<%= user.id%>" style="background-color:#2196f3; border-color:#0d8aee"><i class="material-icons">perm_identity</i></a>
                             <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarUsuario<%= user.id%>" style="background-color:#ff9800; border-color:#e68900"><i class="material-icons">mode_edit</i></a>
@@ -134,13 +138,13 @@
                 </tbody>
             </table>
             <% if !@users.present? %>
-            <h1 class="text-center">No se ha encontrado ninguna coincidencia :(</h1>
+            <h5 class="text-center">No hay coincidencias</h5>
             <% end %>
             <div class="center-align"><%= will_paginate @users,renderer: MaterializePagination::Rails %></div>
 
             <!-- Modal nuevo usuario -->
             <div id="nuevoUsuario" class="modal modal-fixed-footer">
-                <%= render :partial => "users/shared/new_user", locals: {sections: @sections, programs: @programs} %>
+                <%= render :partial => "users/shared/new_user", locals: {courses: @courses, programs: @programs} %>
             </div>
             <div id="importar" class="modal modal-max modal-fixed-footer" style="">
                 <%= render :partial => "users/shared/importar"%>

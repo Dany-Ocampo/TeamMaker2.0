@@ -1,66 +1,73 @@
 <div style="padding-top:3%">
     <div class="container">
-        <div class="row center-align">
-            <% if current_user.group != nil %>
-            <h2 style="display: inline"><b>
-                    Grupo n° <%= current_user.group %> / sección <%= current_user.sections.first.code %>
-                </b></h2>
-            <hr style="background-color:#2196F3;height: 5px;border-color: transparent !important;">
-            <div style="padding-top: 50px">
-                <% @my_group.each do |estudiante| %>
-                <div class="col l6 m8 s12">
-                    <div class="card horizontal <% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> darken-2 lighten-1 white-text z-depth-5">
-                        <div class=" <% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> darken-5 card-image" style="width: 20% !important;color:<% if current_user.email == estudiante.email %> #ffe0b2 <% else %> #bbdefb <% end %>">
-                            <p align="center">ENEATIPO</p>
-                            <% if estudiante.eneatype != nil %>
-                            <h1><%= estudiante.eneatype.number %></h1>
-                            <% else %>
-                            <p>Número</p>
-                            <% end %>
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <h5 class="flow-text" align="center"><b><%= estudiante.email %></b></h5>
-                                <hr class="<% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> lighten-4" style="height: 1px;border-color: transparent !important;">
-                                <p align="justify">
+        <div>
+            <% if @my_groups != nil %>
+                <% @my_groups.each do |group| %>
+                    <div class="row center-align">
+                    <h2 style="display: inline"><b>
+                    Grupo n°<%= group[0].group_number %> / Curso: <%= group[0].course.code %>
+                    </b></h2>
+                    <hr style="background-color:#2196F3;height: 5px;border-color: transparent !important;">
+                    <div style="padding-top: 50px">
+                    <% group.each do |user_course| %>
+                        <% estudiante = user_course.user %>
+                        <div class="col l6 m8 s12">
+                            <div class="card horizontal <% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> darken-2 lighten-1 white-text z-depth-5">
+                                <div class=" <% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> darken-5 card-image" style="width: 20% !important;color:<% if current_user.email == estudiante.email %> #ffe0b2 <% else %> #bbdefb <% end %>">
+                                    <p align="center">ENEATIPO</p>
                                     <% if estudiante.eneatype != nil %>
-                                    <% if estudiante.eneatype.number == 1 %>
-                                    EL PERFECCIONISTA: Estas personas creen tener una misión en la vida, lo que las lleva a desear mejorar el mundo de diversas formas...
-                                    <% elsif estudiante.eneatype.number == 2 %>
-                                    EL COLABORADOR: Ser generosas y desvivirse por los demás las hace pensar que su forma de ser es la más preciosa y la que tiene...
-                                    <% elsif estudiante.eneatype.number == 3 %>
-                                    EL TRIUNFADOR: Son las «estrellas» de la naturaleza humana, y la gente suele admirarlos por su estilo y sus logros personales...
-                                    <% elsif estudiante.eneatype.number == 4 %>
-                                    EL ARTISTA: Creen ser distintos a los demás seres humanos y que, por lo tanto, nadie puede comprenderlos ni amarlos lo suficiente...
-                                    <% elsif estudiante.eneatype.number == 5 %>
-                                    EL SABIO: Más que cualquiera de los demás tipos, los Cinco desean descubrir por qué las cosas son como son...
-                                    <% elsif estudiante.eneatype.number == 6 %>
-                                    EL LEAL: Los Seis son los más leales a sus amigos y fieles a sus creencias. Se hundirán con el barco y perseverarán en las relaciones...
-                                    <% elsif estudiante.eneatype.number == 7 %>
-                                    EL ENTUSIASTA: Asisten a la vida con curiosidad, optimismo y espíritu de aventura, como niños en una tienda de caramelos...
-                                    <% elsif estudiante.eneatype.number == 8 %>
-                                    EL DESAFIADOR: Tienen carisma, además de las capacidades físicas y psíquicas para convencer a la gente de que los siga en todo...
-                                    <% elsif estudiante.eneatype.number == 9 %>
-                                    EL MEDIADOR: Suelen ser personas espirituales que anhelan la conexión con el cosmos y con los demás...
-                                    <% end %>
+                                    <h1><%= estudiante.eneatype.number %></h1>
                                     <% else %>
-                                <p>Número</p>
-                                <% end %>
-                                </p>
-                            </div>
-                            <div class="card-action">
-                                <a style="color:<% if current_user.email == estudiante.email %> #ffe0b2 <% else %> #bbdefb <% end %>" href="http://eneagrama.personarte.com/eneatypes/" target="_blank">Saber más...</a>
+                                    <p>Número</p>
+                                    <% end %>
+                                </div>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <h5 class="flow-text" align="center"><b><%= estudiante.email %></b></h5>
+                                        <hr class="<% if current_user.email == estudiante.email %> orange <% else %> blue <% end %> lighten-4" style="height: 1px;border-color: transparent !important;">
+                                        <p align="justify">
+                                            <% if estudiante.eneatype != nil %>
+                                            <% if estudiante.eneatype.number == 1 %>
+                                            EL PERFECCIONISTA: Estas personas creen tener una misión en la vida, lo que las lleva a desear mejorar el mundo de diversas formas...
+                                            <% elsif estudiante.eneatype.number == 2 %>
+                                            EL COLABORADOR: Ser generosos y desvivirse por los demás les hace pensar que su forma de ser es la más preciosa y la que tiene...
+                                            <% elsif estudiante.eneatype.number == 3 %>
+                                            EL TRIUNFADOR: Son las «estrellas» de la naturaleza humana, y la gente suele admirarlos por su estilo y sus logros personales...
+                                            <% elsif estudiante.eneatype.number == 4 %>
+                                            EL ARTISTA: Creen ser distintos a los demás seres humanos y que, por lo tanto, nadie puede comprenderlos ni amarlos lo suficiente...
+                                            <% elsif estudiante.eneatype.number == 5 %>
+                                            EL SABIO: Más que cualquiera de los demás tipos, los Cinco desean descubrir por qué las cosas son como son...
+                                            <% elsif estudiante.eneatype.number == 6 %>
+                                            EL LEAL: Los Seis son los más leales a sus amigos y fieles a sus creencias. Se hundirán con el barco y perseverarán en las relaciones...
+                                            <% elsif estudiante.eneatype.number == 7 %>
+                                            EL ENTUSIASTA: Asisten a la vida con curiosidad, optimismo y espíritu de aventura, como niños en una tienda de caramelos...
+                                            <% elsif estudiante.eneatype.number == 8 %>
+                                            EL DESAFIADOR: Tienen carisma, además de las capacidades físicas y psíquicas para convencer a la gente de que los siga en todo...
+                                            <% elsif estudiante.eneatype.number == 9 %>
+                                            EL MEDIADOR: Suelen ser personas espirituales que anhelan la conexión con el cosmos y con los demás...
+                                            <% end %>
+                                            <% else %>
+                                        <p>Número</p>
+                                        <% end %>
+                                        </p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a style="color:<% if current_user.email == estudiante.email %> #ffe0b2 <% else %> #bbdefb <% end %>" href="http://eneagrama.personarte.com/eneatypes/" target="_blank">Saber más...</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <% end %>
                     </div>
-                </div>
+                </div>    
                 <% end %>
-            </div>
             <% else %>
             <h2 style="display: inline"><b>Equipo de trabajo</b></h2>
             <hr style="background-color:#2196F3;height: 5px;border-color: transparent !important;">
             <h3 align="center" class="thin" style="color:#777373;">Aún no hay equipos formados</h3>
             <% end %>
+            <br><br>
         </div>
     </div>
 </div>
+

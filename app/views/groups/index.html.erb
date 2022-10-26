@@ -3,34 +3,21 @@
         <div class="row">
             <div class="col l12 s12 center-align">
                 <h3 style="display: inline"><b>Grupos de trabajo</b></h3>
-                <!--
-          <div class="preloader-wrapper small active" style="margin-left:30px">
-            <div class="spinner-layer spinner-red-only">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-          </div>
-<span style="padding-bottom: 30px;    font-size: 16px;">Conformando equipos... </span>-->
                 <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;margin-bottom:20px">
 
                 <% if @status && @status == 'NO ES POSIBLE GENERAR LOS EQUIPOS DE:' %>
                 <div class="card-panel card-fix red lighten-4 red-text center-align">
                     <i class="material-icons medium">mood_bad</i>
-                    <h5 class="h5-fix"><b>Ups!, algo no salio bien ... </b></h5>
+                    <h5 class="h5-fix"><b>¡Ups! Algo no salió bien ... </b></h5>
                     <p style="margin: 4px;"> <%= @status %> </p>
-                    <p style="margin: 4px;"><b> <%= @status_seccion %> / </b></p>
-                    <p>Esto puede deberse a que la sección no cuenta con la cantidad apropiada de estudiantes para generar los equipos o porque ingreso una cantidad de estudiantes por grupo menor a <b>3</b></p>
+                    <p style="margin: 4px;"><b> <%= @status_curso %> / </b></p>
+                    <p>Esto puede deberse a que el curso no cuenta con la cantidad apropiada de estudiantes para generar los equipos o porque ingresó una cantidad de estudiantes por grupo menor a <b>3</b></p>
                 </div>
                 <% elsif @status && @status == '¡GRUPOS GENERADOS CON ÉXITO!' %>
                 <div class="card-panel card-fix green lighten-4 green-text center-align">
                     <i class="material-icons medium ">mood</i>
                     <h5 class="h5-fix"><b>Todo bien ... </b></h5>
-                    <p class="alert" style="margin: 4px;">- <%= @status %> -</p>
+                    <p class="alert" style="margin: 4px;"> <%= @status %> </p>
                 </div>
                 <% end %>
             </div>
@@ -43,9 +30,9 @@
                         <input placeholder="n° de estudiantes" id="porGrupo" name="porGrupo" type="number" class="validate">
                     </div>
                     <div class="input-field fix-placeholder">
-                        <select placeholder="Seccion" id="seccion" name="seccion" type="number" class="validate">
-                            <% current_user.sections.each do |section| %>
-                            <option value="<%= section.id %>"><%= section.code %></option>
+                        <select placeholder="Curso" id="curso" name="curso" type="number" class="validate">
+                            <% current_user.courses.each do |course| %>
+                            <option value="<%= course.id %>"><%= course.code %></option>
                             <% end %>
                         </select>
                     </div>
@@ -60,39 +47,40 @@
                     <p>Al conformar los equipos de trabajo considere lo siguiente:</p>
                     <li>N° de estudiantes mínimo por grupo deben ser 3 estudiantes.</li>
                     <li>Considere que la cantidad de integrantes por grupo no se diferencie por más de un estudiante.</li>
+                    <li>Verifique que todos los alumnos del curso hayan respondido los test correspondientes, de lo contrario no será incluido en ningún equípo.</li>
                     <p></p>
                 </div>
             </div>
 
 
 
-            <% @sections_show.each do |section| %>
+            <% @courses_show.each do |course| %>
             <div class="col s12 center-align">
-                <div class="card blue white-text">
+                <div class="card blue black-text">
                     <div class="card-content">
-                        <h4> Sección: <%= section.code %></h4>
-                        <%= link_to "EXPORTAR", excel_path(format: :xlsx, section: section.id), class: 'btn blue waves-light' %>
-                        <%= link_to "COMPLAINT", complaint_path(format: :xlsx, section: section.id), class: 'btn blue waves-light' %>
+                        <h4> Curso: <%= course.code %></h4>
+                        <%= link_to "EXPORTAR", excel_path(format: :xlsx, course: course.id), class: 'btn white waves-light black-text' %>
+                        <!-- <%= link_to "COMPLAINT", complaint_path(format: :xlsx, course: course.id), class: 'btn blue waves-light' %> -->
                     </div>
-                    <% if section.groups.exists? %>
-                    <div class="card-tabs">
-                        <ul class="tabs tabs-fixed-width tabs-transparent">
-                            <% @section_groups[section.id].each do |group_number, members| %>
-                                <li class="tab"><a href="#group<%= group_number.to_s + section.id.to_s %>">grupo <%= group_number %></a></li>
+                    <% if course.groups.exists? %>
+                    <div class="card-tabs black-text">
+                        <ul class="tabs tabs-fixed-width tabs-transparent black-text">
+                            <% @course_groups[course.id].each do |group_number, members| %>
+                                <li class="tab black-text"><a href="#group<%= group_number.to_s + course.id.to_s %>">grupo <%= group_number %></a></li>
                             <% end %>
                         </ul>
                     </div>
                     <div class="card-content" style="background-color:#1e87da">
                         <div class=" row">
-                            <% @section_groups[section.id].each do |group_number, members| %>
+                            <% @course_groups[course.id].each do |group_number, members| %>
                                  <% if group_number.present? %>
-                                    <div id="group<%= group_number.to_s + section.id.to_s %>">
+                                    <div id="group<%= group_number.to_s + course.id.to_s %>">
                                         <%  members.each do |rel| %>
                                             <% if rel.user.present?  %>
-                                                <!-- Modal Ver estudiante-->
+                                                <!-- Modal Ver estudiante -->
                                                 <div id="verEstudiante<%= rel.user.id%>" class="modal">
                                                     <%= render :partial => "users/shared/show_user", locals: {user: rel.user} %>
-                                                </div>
+                                                </div> 
                                                 <div class="col l6 m12 s12">
                                                     <div class="card horizontal white darken-2 lighten-1 black-text z-depth-5">
                                                         <div class=" orange darken-5 card-image" style="width: 20% !important;color:#ffe0b2">

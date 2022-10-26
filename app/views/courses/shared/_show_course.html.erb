@@ -1,41 +1,45 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+
 <div class="modal-content">
-    <h4><b>Sección:</b>
-        <span class="sub-titulo"><%= section.code %></span>
-        <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarSeccion<%= section.id%>" style="background-color:#ff9800; border-color:#e68900;font-size: 16px"><i class="material-icons">mode_edit</i></a>
-    </h4>
-    <% if section.id != nil %>
+    <h3><b>Curso:</b>
+        <span class="sub-titulo" style="color:#2196F3 !important;"><%= course.code %></span>
+        <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarCurso<%= course.id%>" style="background-color:#ff9800; border-color:#e68900;font-size: 16px"><i class="material-icons">mode_edit</i></a>
+    </h3>
+    <% if course.id != nil %>
     <div class="row">
         <div class="col s12">
-            <strong>Profesor(es): </strong>
+            <b>Profesor(es): </b>
             <p>
-                <% if section.users.where(rol: 1).count == 0 %>
+                <% if course.users.where(rol: 1).count == 0 %>
                 Ningún profesor asignado aún
                 <% else %>
-                <% section.users.where(rol: 1).each do |t| %>
+                <% course.users.where(rol: 1).each do |t| %>
                 <span class="chip">
                     <%= t.email %>
                 </span>
                 <% end %>
                 <% end %>
             </p>
-            <strong>Ayudante(s): </strong>
+            <b>Ayudante(s): </b>
             <p>
-                <% if section.users.where(rol: 2).count == 0 %>
+                <% if course.users.where(rol: 2).count == 0 %>
                 Ningún ayudante asignado aún
                 <% else %>
-                <% section.users.where(rol: 2).each do |t| %>
+                <% course.users.where(rol: 2).each do |t| %>
                 <span class="chip">
                     <%= t.email %>
                 </span>
                 <% end %>
                 <% end %>
             </p>
-            <strong> Estudiantes: </strong>
+            <b> Estudiantes: </b>
             <div class="container" style="width: 95%;">
                 <div class="row" style="margin-bottom: 0px;">
                     <ul class="collection center">
                         <% num = 1 %>
-                        <% section.users.where(rol: 3).each do |s| %>
+                        <% course.users.where(rol: 3).each do |s| %>
                         <a href="#verEstudiante<%= s.id%>" class="collection-item modal-trigger"><span class="left"> <%= num %></span><%= s.email %></a>
                         <% num = num + 1 %>
                         <% end %>
@@ -45,7 +49,4 @@
         </div>
     </div>
     <% end %>
-</div>
-<div class="modal-footer">
-    <a class="modal-action modal-close waves-effect btn red left">Volver</a>
 </div>

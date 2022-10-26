@@ -18,22 +18,22 @@ class RegistrationsController < Devise::RegistrationsController
         program = Program.find(program_id)
         @user = User.new(user_params)
         @user.programs << program
-        @sections = params[:sections]
-        if @sections == nil
+        @courses = params[:courses]
+        if @courses == nil
         redirect_back(fallback_location: users_path)
-          flash[:alert] = "Usuario sin sección"
-        else    
-          if @user.rol == 3 && @sections.count > 1
-            redirect_back(fallback_location: users_path)
-            errors = "Estudiantes solo pueden tener 1 sección"
-            flash[:alert] = errors
+          flash[:alert] = "Usuario sin curso"
+        #else    
+         # if @user.rol == 3 && @courses.count > 1
+          #  redirect_back(fallback_location: users_path)
+           # errors = "Estudiantes solo pueden tener 1 sección"
+            #flash[:alert] = errors
           else
             if @user.save
-              @sections.each do |section_id|
-                UserSection.create(section_id: section_id,user_id: @user.id)
+              @courses.each do |course_id|
+                UserCourse.create(course_id: course_id,user_id: @user.id)
               end
             #  elsif current_user.rol == 1
-            #    UserSection.create(section_id: @sections.to_i,user_id: @user.id)
+            #    UserSection.create(course_id: @courses.to_i,user_id: @user.id)
             #  UserMailer.registration_confirmation(@user).deliver_now
                 redirect_back(fallback_location: users_path, notice: "¡Usuario " + @user.email + " registrado con exito!")
             else
@@ -45,16 +45,15 @@ class RegistrationsController < Devise::RegistrationsController
                 flash[:alert] = errors
               end
             end
-          end
         end
       else
         redirect_to root_path
       end
     end
+  
     
     private
     def user_params
-      params.require(:user).permit(:email, :name, :surname, :rol, :section, :status, :password, :password_confirmation, :accept_model, :study_group)
+      params.require(:user).permit(:email, :name, :surname, :rol, :course, :status, :password, :password_confirmation, :accept_model, :study_group, :age, :gender)
     end
-  
   end

@@ -10,9 +10,14 @@
             <li role="separator" class="divider"></li>
             <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete%></li>
           </ul>
-          <ul id="dropdown_section" class="dropdown-content" style="margin-top: 64px;">
-            <% current_user.sections.each do |section| %>
-              <li><%= link_to section.code,section_path(section) %></li>
+          <ul id="dropdown_course" class="dropdown-content" style="margin-top: 64px;">
+            <% current_user.courses.each do |course| %>
+              <li><%= link_to course.code,course_path(course) %></li>
+            <% end %>
+          </ul>
+          <ul id="dropdown_group" class="dropdown-content" style="margin-top: 64px;">
+            <% current_user.courses.each do |course| %>
+              <li><%= link_to course.code, grupos_path %></li>
             <% end %>
           </ul>
           <ul id="dropdown_test" class="dropdown-content" style="margin-top: 64px;">
@@ -41,8 +46,10 @@
                       current_user.tests.find_by(kind: 2, answered: true).present? &&
                       current_user.tests.find_by(kind: 3, answered: true).present?
                 %>
-            <li class="<%= 'active' if current_page?(mi_equipo_path) %>"><%= link_to "Mi equipo", mi_equipo_path %></li>
-           <% end %> <% end %> 
+            <li class="<%= 'active' if current_page?(mi_equipo_path) %>"><%= link_to "Mis grupos", mi_equipo_path %></li>
+           <% end %>
+           <li class="<%= 'active' if current_page?(courses_path) %>"><%= link_to "Mis cursos", my_courses_path %></li>
+           <% end %>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown_test">
               Mis test
               <% if current_user.accept_model? %>
@@ -62,9 +69,11 @@
           <% if current_user.rol == 0 %>
             <li class="<%= 'active' if current_page?(grupos_path) %>"><%= link_to "Grupos", grupos_path%></li>
             <li class="<%= 'active' if current_page?(usuarios_path) %>"><%= link_to "Usuarios", usuarios_path%></li>
-            <li class="<%= 'active' if current_page?(sections_path) %>"><%= link_to "Secciones", sections_path%></li>
+            <li class="<%= 'active' if current_page?(courses_path) %>"><%= link_to "Cursos", courses_path%></li>
           <% elsif current_user.rol == 1 || current_user.rol == 2 %>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown_section">Mis secciones<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown_course">Mis cursos<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li class="<%= 'active' if current_page?(grupos_path) %>"><%= link_to "Mis grupos", grupos_path %></li>
+            <!--<li><a class="dropdown-button" href="#!" data-activates="dropdown_group">Mis grupos<i class="material-icons right">arrow_drop_down</i></a></li> -->
           <% end %>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown_user"><%=current_user.email%><i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
@@ -82,9 +91,9 @@
             <li role="separator" class="divider"></li>
             <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete%></li>
           </ul>
-          <ul id="dropdown_section_mobile" class="dropdown-content" style="margin-top: 64px;">
-            <% current_user.sections.each do |section| %>
-              <li><%= link_to section.code,section_path(section) %></li>
+          <ul id="dropdown_course_mobile" class="dropdown-content" style="margin-top: 64px;">
+            <% current_user.courses.each do |course| %>
+              <li><%= link_to course.code,course_path(course) %></li>
             <% end %>
           </ul>
           <ul id="dropdown_test_mobile" class="dropdown-content" style="margin-top: 48px;">
@@ -127,9 +136,10 @@
           <% if current_user.rol == 0 %>
             <li class="<%= 'active' if current_page?(grupos_path) %>"><%= link_to "Grupos", grupos_path%></li>
             <li class="<%= 'active' if current_page?(usuarios_path) %>"><%= link_to "Usuarios", usuarios_path%></li>
-            <li class="<%= 'active' if current_page?(sections_path) %>"><%= link_to "Secciones", sections_path%></li>
+            <li class="<%= 'active' if current_page?(courses_path) %>"><%= link_to "Cursos", courses_path%></li>
           <% elsif current_user.rol == 1 || current_user.rol == 2 %>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown_section_mobile">Mis secciones<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown_course_mobile">Mis cursos<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li class="<%= 'active' if current_page?(grupos_path) %>"><%= link_to "Mis grupos", grupos_path%></li>  
           <% end %>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown_user_mobile"><%=current_user.email%><i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     collection { post :import}
   end
 
-  resources :sections do
+  resources :courses do
       member do
           get 'home'
       end
@@ -22,9 +22,9 @@ Rails.application.routes.draw do
   post 'test_eneagrama/test' => 'psychological#create' 
 
   get 'usuarios' => 'users#index'
-  get 'secciones/test' => 'sections#index' 
-  get 'seccion/:id' => 'sections#show' 
-  get 'my_sections' => 'sections#my_sections'
+  get 'cursos/test' => 'courses#index' 
+  get 'curso/:id' => 'courses#show' 
+  get 'my_courses' => 'courses#my_courses_list'
 
   get 'grupos' => 'groups#index'
   post  'grupos' => 'groups#index' 

@@ -8,12 +8,12 @@
                 <h3 class="sub-titulo" style="display: inline; color:#2196F3 !important;">Social</h3>
                 <div class="card-panel blue lighten-2" style="padding: 10px 24px;">
                     <strong class="white-text flow-text"><b>INSTRUCCIONES: </b></strong>
-                    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;"><b style="color:#005396;">Solo seleccione</b> a los estudiantes con quien le interesaría o no realizar la actividad propuesta en la pregunta, los demás estudiantes que le sean indiferentes simplemente <b style="color:#005396;">no los marque.</b></p>
+                    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;"><b style="color:#005396;">Sólo seleccione</b> a los estudiantes con quien le interesaría o no realizar la actividad propuesta en la pregunta, los demás estudiantes que le sean indiferentes simplemente <b style="color:#005396;">no los marque.</b></p>
                 </div>
 
                 <%= form_tag({:action => "create"}) do %>
                 <% if @partnersA != [] %>
-                <p class="flow-text"><b>¿A quien(es) NO elegirías para trabajar en equipo?</b></p>
+                <p class="flow-text"><b>¿A quién(es) NO elegirías para trabajar en equipo?</b></p>
                 <select name="partnersA[]" multiple="" class="dropdown">
                     <option value="" disabled selected>Seleccione...</option>
                     <% @partnersA.each do |partner| %>
@@ -22,7 +22,7 @@
                 </select>
                 <% end %><br>
                 <% if @partnersB != [] %>
-                <p class="flow-text"><b>¿Quien(es) crees que NO te elegirían para trabajar en equipo?</b></p>
+                <p class="flow-text"><b>¿Quién(es) crees que NO te elegirían para trabajar en equipo?</b></p>
                 <select name="partnersB[]" multiple="" class="dropdown">
                     <option value="" disabled selected>Seleccione...</option>
                     <% @partnersB.each do |partner| %>
@@ -38,11 +38,11 @@
                 <h3 class="sub-titulo" style="display: inline; color:#2196F3 !important;">Social</h3>
                 <div class="card-panel blue lighten-2" style="padding: 10px 24px;">
                     <strong class="white-text flow-text"><b>INSTRUCCIONES: </b></strong>
-                    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;"><b style="color:#005396;">Solo seleccione</b> a los estudiantes con quien le interesaría o no realizar la actividad propuesta en la pregunta, los demás estudiantes que le sean indiferentes simplemente <b style="color:#005396;">no los marque.</b></p>
+                    <p class="white-text flow-text" align="justify" style="margin: 1rem 0;"><b style="color:#005396;">Sólo seleccione</b> a los estudiantes con quien le interesaría o no realizar la actividad propuesta en la pregunta, los demás estudiantes que le sean indiferentes simplemente <b style="color:#005396;">no los marque.</b></p>
                 </div>
 
                 <%= form_tag({:action => "create"}) do %>
-                <p class="flow-text"><b>¿A quien(es) elegirías para trabajar en equipo?</b></p>
+                <p class="flow-text"><b>¿A quién(es) elegirías para trabajar en equipo?</b></p>
                 <select name="partnersA[]" multiple="" class="dropdown">
                     <option value="" disabled selected>Seleccione...</option>
                     <% @partners.each do |partner| %>
@@ -50,7 +50,7 @@
                     <% end %>
                 </select><br>
 
-                <p class="flow-text"><b>¿Quien(es) crees que te elegirían para trabajar en equipo?</b></p>
+                <p class="flow-text"><b>¿Quién(es) crees que te elegirían para trabajar en equipo?</b></p>
                 <select name="partnersB[]" multiple="" class="dropdown">
                     <option value="" disabled selected>Seleccione...</option>
                     <% @partners.each do |partner| %>

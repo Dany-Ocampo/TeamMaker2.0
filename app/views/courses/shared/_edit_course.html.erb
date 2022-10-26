@@ -1,0 +1,63 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+<div class="modal-content">
+    <h3><b>Editar curso</h3></b>
+    <%= form_for(course) do |s| %>
+    <!-- Inicio de form -->
+    <% if alert && alert[0] == course.id %>
+    <div class="card-panel card-fix red lighten-4 red-text center-align">
+        <% alert.each do |msg| %>
+        <% if msg != course.id %>
+        <p class="alert">- <%= msg %></p>
+        <% end %>
+        <% end %>
+    </div>
+    <% end %>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :code, "Curso" %>
+            <%= s.text_field :code, autofocus: true, class: "validate", required: "true", placeholder:"Ej: A-1"  %>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :year, "Año" %>
+            <%= s.number_field :year, placeholder:"2017", class: 'validate', required: "true"%>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :semester, "Semestre" %>
+        <div class="input-field">
+            <select name="course[semester]" class="browser-default">
+                <option <%if s.object.semester == 1 %>selected<% end %> value=1>Primero</option>
+                <option <%if s.object.semester == 2 %>selected<% end %> value=2>Segundo</option>
+            </select>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :course_type, "Tipo" %>
+        <div class="input-field"> 
+            <select name="course[course_type_id]" class="browser-default">
+                    <% @course_types.each do |type| %>
+                    <option value="<%= type.id %>" ><%= type.name %></option>
+                        <% end %>
+            </select>
+        </div>
+    </div>
+<!--<%= s.fields_for :subject do |sub| %>
+    <div class="col l6 m6 s12">
+              <div class="field">
+            <%= sub.label :name, "Asignatura" %>
+            <%= sub.text_field :name, autofocus: true, class: "validate", required: "true", placeholder:"Álgebra I"  %>
+            </div> 
+         <% end %>   
+    </div> -->
+</div>
+
+<div class="modal-footer">
+   <!-- <a class=" modal-action modal-close waves-effect btn red left">Volver</a> -->
+    <%= s.submit 'Actualizar curso', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + course.code + "? ')",class: "btn left" %>
+    <% end %>
+    <!-- termino del form-->
+</div>

@@ -13,17 +13,17 @@
             <% elsif current_user.test_count == 3 || current_user.test_count == 4 %>
             <div class="card-panel  amber darken-1 white-text">
                 <i class="large material-icons">warning</i>
-                <p class="flow-text" align="center" style="margin:0;">¡Sus respuestas no coinciden! Si falla nuevamente debera contestar un test muy largo. (preste atención a lo que lee)</p>
+                <p class="flow-text" align="center" style="margin:0;">¡Sus respuestas no coinciden! Si falla nuevamente deberá contestar un test muy largo (preste atención a lo que lee).</p>
             </div>
             <% elsif current_user.test_count == 5 %>
             <div class="card-panel  red darken-1 white-text">
                 <i class="large material-icons">new_releases</i>
                 <p class="flow-text" align="center" style="margin:0;">¡Sus respuestas no coinciden!</p>
-                <p class="flow-text" align="center" style="margin:0;">Debera contestar un test más largo.</p>
+                <p class="flow-text" align="center" style="margin:0;">Deberá contestar un test más largo.</p>
             </div>
             <% end %>
 
-            <p class="flow-text" align="center">Este test psicológico le permitirá conocer su tipo de personalidad además de aportar información relevante para que la generación de su equipo de trabajo se realice bajo el mayor nivel de compatibilidad posible el cual podrá conocer al finalizar el test.</p>
+            <p class="flow-text" align="center">Este test psicológico le permite conocer su tipo de personalidad y aporta información relevante para que la generación de su equipo de trabajo se realice bajo el mayor nivel de compatibilidad posible.</p>
 
             <% if current_user.test_count == 1 || current_user.test_count == 2 || current_user.test_count == 5 %>
             <%= link_to "Ir al test", test_eneagrama_test_path , class: "btn btn-large blue waves-effect waves-light" %>

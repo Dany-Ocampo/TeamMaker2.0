@@ -1,5 +1,9 @@
-<div class="modal-content left-align black-text">
-    <h5 id="nuevoUsuarioTag<%= user.id %>"><b>USUARIO:</b>
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+
+<div class="modal-content">
+    <h3><b>Usuario:</b>
         <% if user.rol == 0 %>
         <span style="color:#2196F3 !important;">Coordinador</span>
         <% elsif user.rol == 1%>
@@ -14,7 +18,7 @@
         <% if current_user.rol == 1 %>
         <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarUsuario<%= user.id%>" style="background-color:#ff9800; border-color:#e68900;font-size: 16px"><i class="material-icons">mode_edit</i></a>
         <% end %>
-    </h5>
+    </h3>
     <% if user.id != nil %>
     <div class="row">
         <div class="col l6">
@@ -27,11 +31,19 @@
                 <%= user.email %>
             </p>
             <p>
-                <b>Sección:</b>
-                <% user.sections.each do |h| %>
-                <span class="chip">
-                    <%= h.code %>
-                </span>
+                <b>Género:</b>
+                <%= user.gender %>
+            </p>
+            <p>
+                <b>Edad:</b>
+                <%= user.age %>
+            </p>
+            <p>
+                <b>Curso:</b>
+                <% user.courses.each do |h| %>
+                    <span class="chip">
+                        <%= h.code %>
+                    </span>
                 <% end %>
             </p>
             <% if user.rol == 3%>
@@ -57,16 +69,6 @@
         </div>
         <% if user.rol == 3 %>
         <div class="col l6">
-            <p>
-                <b>Organizado por:</b>
-                <% if user.accept_model == true %>
-                El profesor
-                <% elsif user.accept_model == false %>
-                Los estudiantes
-                <% elsif user.accept_model == nil %>
-                No informado
-                <% end %>
-            </p>
             <% if user.accept_model == true %>
             <p>
                 <b>
@@ -109,8 +111,8 @@
 
             <p>
                 <b>N° de grupo:</b>
-                <% if user.group != nil %>
-                <%= user.group %>
+                <% if user.groups != nil %>
+                <%= user.groups %>
                 <% else %>
                 Ninguno
                 <% end %>
@@ -120,7 +122,4 @@
 
     </div>
     <% end %>
-</div>
-<div class="modal-footer">
-    <a class="modal-action modal-close waves-effect btn red">Volver</a>
 </div>

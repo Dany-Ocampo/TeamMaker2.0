@@ -1,8 +1,8 @@
-class CreateSections < ActiveRecord::Migration[6.0]
+class CreateCourses < ActiveRecord::Migration[6.0]
   def change
-    create_table :sections do |t|
+    create_table :courses do |t|
       t.belongs_to :subject, null: false, foreign_key: true
-      t.belongs_to :section_type, null: false, foreign_key: true
+      t.belongs_to :course_type, null: false, foreign_key: true
       t.string :code
       t.integer :year
       t.integer :semester

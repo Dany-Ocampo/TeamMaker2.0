@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       
       t.string    :name
       t.string    :surname
-      t.integer    :sex
+      t.integer   :sex
       t.integer   :age
       t.integer   :test_count, default: 0, null: false
       t.integer   :rol       , default: 3, null: false

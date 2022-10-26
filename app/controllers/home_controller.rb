@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 					end
 					redirect_to root_path
 				else
-					redirect_to(root_path, alert: "No se a podido procesar la solicitud")
+					redirect_to(root_path, alert: "No se ha podido procesar la solicitud")
 				end
 			end
 	  end

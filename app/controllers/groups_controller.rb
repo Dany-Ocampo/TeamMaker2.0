@@ -2,8 +2,8 @@ class GroupsController < ApplicationController
 
     def get_complaint
         require 'matrix'
-        section = Section.find(params[:section])
-        allStudents = section.users.where(rol: 3)
+        course = Course.find(params[:course])
+        allStudents = course.users.where(rol: 3)
         students = []
         studentsIndexes = Hash.new
         studentActualIndex = 0
@@ -192,7 +192,7 @@ class GroupsController < ApplicationController
 
          #pi             = promedio_por_individuo(p,5,@Map.row_size/5,pt.count,5).clone
 
-         groups = get_groups section
+         groups = get_groups course
 
          ptGroups = []
          logger.debug groups
@@ -220,7 +220,7 @@ class GroupsController < ApplicationController
             end
          end
 
-         @sectionName = section.code
+         @courseName = course.code
 
          @data = acums
  
@@ -235,17 +235,18 @@ class GroupsController < ApplicationController
   def index
     # 1.CONVERSION DE DATOS DEL MODELO PSICOSOCIAL
     require 'matrix'
-    @sections_show = Section.all
-    if params[:seccion] 
-      @sections_show = [Section.find(params[:seccion])]
+    #@courses_show = Course.all
+    @courses_show = current_user.courses
+    if params[:curso] 
+      @courses_show = [Course.find(params[:curso])]
     end
     @grupos = []
-    @section_title = []
-    @status_seccion = ''
+    @course_title = []
+    @status_curso = ''
     if params[:porGrupo] &&  params[:porGrupo].to_i != 0
-      @sections_show.each_with_index do |seccion, indice|
-        #seccion = Section.first 
-        estudiantes = seccion.users.where(rol: 3)
+      @courses_show.each_with_index do |curso, indice|
+        #curso = Course.first 
+        estudiantes = curso.users.where(rol: 3)
         @total_estudiantes = estudiantes.count
         @personas = []
         indexUser = 0
@@ -619,9 +620,9 @@ class GroupsController < ApplicationController
           ##  aux = ''
           ##  solutions[min].row(i-1).each do |e|
           ##    aux = aux + " " + e.to_s
-          ##    seccion.users.where(rol: 3).each do |estu|
+          ##    curso.users.where(rol: 3).each do |estu|
           ##      if Eneatype.exists?(user_id: estu.id) 
-          ##        puts "seccion: " + seccion.section.to_s + " numero: " + (indice+1).to_s + " estudiante: " + estu.email.to_s
+          ##        puts "curso: " + curso.course.to_s + " numero: " + (indice+1).to_s + " estudiante: " + estu.email.to_s
           ##      end
           ##    end
           ##  end
@@ -630,10 +631,10 @@ class GroupsController < ApplicationController
           ##puts " "
           @status = '¡GRUPOS GENERADOS CON ÉXITO!'
           @grupos[indice] = solutions[min].clone
-          @section_title[indice] = seccion.code.to_s
+          @course_title[indice] = curso.code.to_s
 
-          #if UserSection.where(section_id: seccion.id).groups_formed.count > 0
-          #  grupadelete = UserSection.where(section_id: seccion.id).groups_formed
+          #if UserCourse.where(course_id: curso.id).groups_formed.count > 0
+          #  grupadelete = UserCourse.where(course_id: curso.id).groups_formed
           #  grupadelete.destroy_all
           #end
           for i in 1..@grupos[indice].row_size 
@@ -641,8 +642,8 @@ class GroupsController < ApplicationController
               if element != 'x' 
                 @personas.each_with_index do |estu, idd|
                   if (idd+1) == element
-                    puts "seccion: " + seccion.code.to_s + " numero: " + (i).to_s + " estudiante: " + estu.email.to_s 
-                    actualData = UserSection.find_by(section_id: seccion.id, user_id: estu.id)
+                    puts "curso: " + curso.code.to_s + " numero: " + (i).to_s + " estudiante: " + estu.email.to_s 
+                    actualData = UserCourse.find_by(course_id: curso.id, user_id: estu.id)
                     actualData.group_number = i
                     actualData.save
                   end
@@ -656,7 +657,7 @@ class GroupsController < ApplicationController
           ##puts " "
           puts  "No es posible calcular grupos"
           @status = 'NO ES POSIBLE GENERAR LOS EQUIPOS DE:'
-          @status_seccion = @status_seccion + ' / ' + seccion.code.to_s
+          @status_curso = @status_curso + ' / ' + curso.code.to_s
           ##if grupos < residuo
           ##  puts  "Grupos de mínimo " + porGrupo.to_s + " estudiantes generaran grupos sobrantes desiguales"
           ##end
@@ -664,9 +665,9 @@ class GroupsController < ApplicationController
         end
       end #ciclo
     end
-    @section_groups = Hash.new
-    @sections_show.each do |section|
-        @section_groups[section.id] = get_groups section
+    @course_groups = Hash.new
+    @courses_show.each do |course|
+        @course_groups[course.id] = get_groups course
     end
 
   end # fin index
@@ -962,27 +963,29 @@ end
   end
 
   def my_group
-    if current_user.group != nil
-      group_user_sections = UserSection.where(group_number: current_user.group, section_id: current_user.sections.first.id )
-      @my_group = []
-
-      group_user_sections.each_with_index do |user_section, index|
-        @my_group[index] = user_section.user
+    #if current_user.group != nil
+    user_groups = current_user.user_courses.where.not(group_number: nil)
+    @my_groups = []
+    if user_groups.count > 0
+      user_groups.each_with_index do |user_course, index|
+        group_user_courses = UserCourse.where(group_number: user_course.group_number, course_id: user_course.course_id)
+        @my_groups << group_user_courses
+      end
+    else
+      @my_groups = nil
     end
   end
-  
-end
 
 def groups_list
-    section = Section.find(params[:section])
-    @groups = get_groups section
+    course = Course.find(params[:course])
+    @groups = get_groups course
     respond_to do |format|
         format.xlsx
     end
   end
 
-def get_groups section
-    groups_formed  = section.user_sections.select(:group_number).distinct.order(:group_number)
+def get_groups course
+    groups_formed  = course.user_courses.select(:group_number).distinct.order(:group_number)
     group_members = Hash.new
     puts groups_formed
     groups_formed.each do |us|
@@ -990,7 +993,7 @@ def get_groups section
         if  us.group_number.present?
             number =  us.group_number
             puts number
-            members = section.user_sections.where(group_number: number).joins(:user)
+            members = course.user_courses.where(group_number: number).joins(:user)
             puts members
             group_members[number] = members
         end

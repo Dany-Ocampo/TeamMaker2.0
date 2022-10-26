@@ -10,12 +10,12 @@
                 <%= devise_error_messages! %>
 
                 <div class="input-field">
-                    <%= f.label :email, "Correo" %><br>
+                    <%= f.label :email, " Ingresa tu correo" %><br>
                     <%= f.email_field :email, autofocus: true ,autocomplete: "off", :class => "validate" , :style => "color:white" %>
                 </div>
                 <br>
                 <div class="actions">
-                    <%= f.submit "Enviar", :class=> "btn btn-default waves-effect waves-light" , :style => "background-color:#3d5afe"%>
+                    <%= f.submit "Enviar", :class=> "btn btn-default waves-effect waves-light" , :style => "background-color:#3d5afe", data: { confirm: "Se ha enviado un link a su correo para el cambio de contraseña" }%>
                 </div>
                 <% end %>
 

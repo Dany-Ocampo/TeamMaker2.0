@@ -6,8 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :user_sections
-  has_many :sections, :through => :user_sections
+  has_many :user_courses
+  has_many :courses, :through => :user_courses
   has_many :tests
   has_one :eneatype, dependent: :destroy
   has_and_belongs_to_many :programs
@@ -16,7 +16,28 @@ class User < ApplicationRecord
   after_create :init_tests
 
   def group
-    self.user_sections.first.group_number
+    if self.user_courses.present?
+      self.user_courses.first.group_number
+    else 
+      0
+    end
+  end
+
+  def groups
+    if self.user_courses.present?
+      self.user_courses.map { |uc| "#{uc.course.code}: #{uc.group_number}" }.join(" - ") 
+    else 
+      "-"
+    end
+  end  
+
+  def gender
+    if self.sex==0
+      return "Masculino"
+    elsif self.sex==1
+      return "Femenino"
+    end
+    return "Indefinido"
   end
 
   def self.import(file)
@@ -31,9 +52,10 @@ class User < ApplicationRecord
       valid_email = false
       valid_password = false
       valid_program = false
-      valid_section = false
+      valid_course = false
       valid_gender = false
       valid_age = false
+      program = nil
 
       if row["name"] != nil && row["name"] != "" && row["name"] != " "
         valid_name = true
@@ -52,28 +74,31 @@ class User < ApplicationRecord
       end
 
       if row["program"] != nil && row["program"] != "" && row["program"] != " "
-        valid_program = true
+        program = Program.find_by(name: row["program"])
+        if program.present?
+          valid_program = true
+        end
       end
 
-      if row["section"] != nil && row["section"] != "" && row["section"] != " "
-        valid_section = true
+      if row["course"] != nil && row["course"] != "" && row["course"] != " "
+        valid_course = true
       end
 
       if row["gender"] != nil && row["gender"] != "" && row["gender"] != " "
-        valid_section = true
+        valid_course = true
       end
 
       if row["age"] != nil && row["age"] != "" && row["age"] != " "
-        valid_section = true
+        valid_course = true
       end
-
-      if valid_name == true && valid_surname == true && valid_email == true && valid_password == true && valid_program && valid_section == true
+      if valid_name == true && valid_surname == true && valid_email == true && valid_password == true && valid_course == true
+      #if valid_name == true && valid_surname == true && valid_email == true && valid_password == true && valid_program && valid_course == true
         $mensaje_numero = $m
         $mensaje_nombre = row["name"]
         $mensaje_apellido = row["surname"]
         $mensaje_correo = row["email"]
         $mensaje_clave = row["password"]
-        $mensaje_section = row["section"]
+        $mensaje_course = row["course"]
         $mensaje_program = row["program"]
         $mensaje_gender = row["gender"]
         $mensaje_age = row["age"]
@@ -87,7 +112,7 @@ class User < ApplicationRecord
         $mensaje_apellido = row["surname"]
         $mensaje_correo = row["email"]
         $mensaje_clave = row["password"]
-        $mensaje_section = row["section"]
+        $mensaje_course = row["course"]
         $mensaje_program = row["program"]
         $mensaje_gender = row["gender"]
         $mensaje_age = row["age"]
@@ -98,10 +123,11 @@ class User < ApplicationRecord
     begin
       CSV.foreach(file.path, headers: true) do |row|
         if count_errors == 0
-          section = Section.find_by(code: row["section"])
-          program = Program.find(row["program"])
+          course = Course.find_by(code: row["course"])
+          program = Program.find_by(name: row["program"])
           program.users.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"], sex: row["gender"].to_i, age: row["age"].to_i)
-          UserSection.create!(section_id: section.id, user_id: User.last.id)
+          #User.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"])
+          UserCourse.create!(course_id: course.id, user_id: User.last.id)
         end
       end
     rescue ActiveRecord::RecordInvalid
@@ -111,7 +137,8 @@ class User < ApplicationRecord
   end
 
   def self.check(file)
-    @header_csv = ["email","name","surname","password","section","program", "gender", "age"]
+    @header_csv = ["email","name","surname","password","course","program", "gender", "age"]
+    #@header_csv = ["email","name","surname","password","course"]
     csv = CSV.open(file.path, :col_sep => ",", :headers => true)
     @header_file = csv.read.headers
     @users = User.all
@@ -130,7 +157,7 @@ class User < ApplicationRecord
           end
         end
 
-        if !Section.find_by(code: row["section"])
+        if !Course.find_by(code: row["course"])
           $persons[i] = row["email"]
           i = i + 1
           $problem = true
@@ -145,8 +172,8 @@ class User < ApplicationRecord
     end   
   end
 
-  def sections=(value)
-    @sections = value
+  def courses=(value)
+    @courses = value
   end
 
   def init_tests

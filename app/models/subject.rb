@@ -1,3 +1,3 @@
 class Subject < ApplicationRecord
-    has_many :sections
+    has_many :users
 end

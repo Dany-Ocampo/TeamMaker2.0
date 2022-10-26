@@ -1,0 +1,68 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+
+<div class="modal-content">
+
+    <h3><b>Nuevo curso</h3></b>
+    <% if @course.errors.any? %>
+    <div class="card-panel card-fix red lighten-4 red-text ">
+        <% @course.errors.full_messages.each do |msg| %>
+        <p class="alert">- <%= msg %></p>
+        <% end %>
+    </div>
+    <% end %>
+    <%= form_for(@course) do |s| %>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :code, "Curso" %>
+            <%= s.text_field :code, autofocus: true, class: "validate", required: "true", placeholder:"Ej: Álgebra"  %>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <div class="field">
+            <%= s.label :year, "Año" %>
+            <%= s.number_field :year, placeholder:"Ej: 2017", class: 'validate', required: "true"%>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :semester, "Semestre" %>
+        <div class="input-field">
+            <select name="course[semester]" class="browser-default">
+                <option value=1>Primer</option>
+                <option value=2>Segundo</option>
+            </select>
+        </div>
+    </div>
+    <div class="col l6 m6 s12">
+        <%= label :course_type, "Tipo" %> 
+             <div class="input-field">
+                <select name="course[course_type_id]" class="browser-default">
+                    <% @course_types.each do |type| %>
+                    <option value="<%= type.id %>" ><%= type.name %></option>
+                        <% end %>
+            </select>
+        </div>
+    </div>
+
+    <!-- <div class="col l6 m6 s12">  -->
+      <!--  <%= label :subject, "Asignatura" %> -->
+              <!--  <div class="field">
+            <%= s.label :subject, "Asignatura" %>
+            <%= s.text_field :subject, autofocus: true, class: "validate", required: "true", placeholder:"Álgebra I"  %>
+        </div> -->
+              <!-- <div class="input-field">
+                <select name="course[subject_id]" class="browser-default">
+                    <% @subjects.each do |subject| %>
+                    <option value="<%= subject.id %>" ><%= subject.name %></option>
+                        <% end %>
+            </select>
+        </div> 
+    </div>-->
+</div>
+<div class="modal-footer">
+      <!--     <a class=" modal-action modal-close waves-effect btn left red">Volver</a> </div> -->
+        <%= s.submit 'Crear curso', :class  => "btn left" %>
+        <% end %>
+    </div>
+

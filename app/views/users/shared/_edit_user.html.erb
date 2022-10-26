@@ -1,9 +1,13 @@
+ <div class="modal-header">
+       <a class=" modal-action modal-close waves-effect btn right red"> X </a>
+    </div>
+
 <div class="modal-content">
-    <h3>Editar usuario</h3>
+    <h3><b>Editar usuario</h3></b>
     <%= form_for(user) do |f| %>
     <!-- Inicio de form -->
     <div class="field">
-        <%= f.label :email, "Correo" %>
+        <%= f.label :email, "Correo electrónico" %>
         <%= f.text_field :email, autofocus: true, class: "validate", placeholder:"ejemplo@correo.cl"  %>
     </div>
     <div class="field">
@@ -14,6 +18,17 @@
         <%= f.label :surname, "Apellidos" %>
         <%= f.text_field :surname, autofocus: true, class: "validate", required: "true", placeholder:"Lagos"  %>
     </div>
+    <div class="field">
+        <%= f.label :age, "Edad" %>
+        <%= f.number_field :age, autofocus: true, class: "validate", required: "true", placeholder:"23" %>
+    </div>
+        <%= label :sex, "Género" %>
+    <div class="input-field">
+        <select name="user[sex]" class="browser-default">
+            <option value=0>Masculino</option>
+            <option value=1>Femenino</option>
+        </select>
+    </div>
     <%= label :rol, "Rol" %>
     <div class="input-field">
         <select name="user[rol]" class="browser-default">
@@ -22,16 +37,24 @@
             <% if current_user.rol == 0 %><option <%if f.object.rol == 1 %>selected<% end %> value=1>Profesor</option><% end %>
         </select>
     </div>
+    <%= label :program_id, "Programa" %>
+    <div class="field">
+        <select name="user[program_id]" class="browser-default">
+            <% @programs.each do |program| %>
+            <option value=<%= program.id %>><%= program.name %></option>
+            <% end %>
+        </select>
+    </div>
     <br>
     <div class="field">
-        <%= f.label "Sección" %>
+        <%= f.label "Curso" %>
         <div class="row" style="margin-bottom: 20px;">
-            <% @sections.each do |s| %>
+            <% @courses.each do |s| %>
             <div class="col s4 m4 l2">
                 <div class="field">
                     <p>
-                        <input id="EditSection<%= user.id %><%= s.id%>" name="sections[]" type="checkbox" value="<%= s.id%>" <% user.sections.each do |u| %> <% if u.id == s.id %> checked=1 <% end %> <% end %> />
-                        <label for="EditSection<%= user.id %><%= s.id%>"><%= s.code%></label>
+                        <input id="EditCourse<%= user.id %><%= s.id%>" name="courses[]" type="checkbox" value="<%= s.id%>" <% user.courses.each do |u| %> <% if u.id == s.id %> checked=1 <% end %> <% end %> />
+                        <label for="EditCourse<%= user.id %><%= s.id%>"><%= s.code%></label>
                     </p>
                 </div>
             </div>
@@ -49,8 +72,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect btn red left">Volver</a>
-    <%= f.submit 'Actualizar usuario', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + user.email.to_s + "? ')",class: "btn right" %>
+    <%= f.submit 'Actualizar usuario', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + user.email.to_s + "? ')",class: "btn left" %>
     <% end %>
     <!-- termino del form-->
 </div>

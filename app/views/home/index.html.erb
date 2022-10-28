@@ -7,13 +7,9 @@
 		<%= render :partial => "home/shared/home_assistant" %>
     <% elsif current_user.rol == 3 %>
     	<% if current_user.tests.find_by(kind: 1, answered: true).present? &&
-                      current_user.tests.find_by(kind: 2, answered: true).present? &&
-                      current_user.tests.find_by(kind: 3, answered: true).present? %>
-                        <% if current_user.group.present? %>
-                            <%= render :partial => "courses/my_courses" %>
-                        <%else%>
-                            <%= render :partial => "home/shared/home_student" %>
-                        <% end %>
+      current_user.tests.find_by(kind: 2, answered: true).present? &&
+      current_user.tests.find_by(kind: 3, answered: true).present? %>
+        <%= render :partial => "home/shared/home_student" %>
     	<% else  %>
     		<%= render :partial => "home/shared/home_student2" %>
     	<% end %>

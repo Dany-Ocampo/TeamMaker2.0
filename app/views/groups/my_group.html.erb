@@ -5,7 +5,7 @@
                 <% @my_groups.each do |group| %>
                     <div class="row center-align">
                     <h2 style="display: inline"><b>
-                    Grupo n°<%= group[0].group_number %> / Curso: <%= group[0].course.code %>
+                    Curso: <%= group[0].course.code %>/ Grupo n°<%= group[0].group_number %> 
                     </b></h2>
                     <hr style="background-color:#2196F3;height: 5px;border-color: transparent !important;">
                     <div style="padding-top: 50px">
@@ -62,9 +62,12 @@
                 </div>    
                 <% end %>
             <% else %>
+            <div class="row center-align">
             <h2 style="display: inline"><b>Equipo de trabajo</b></h2>
             <hr style="background-color:#2196F3;height: 5px;border-color: transparent !important;">
+            </div>
             <h3 align="center" class="thin" style="color:#777373;">Aún no hay equipos formados</h3>
+            <h5 align="center" class="thin" style="color:#777373;">Espere a que alguno de sus profesores genere su grupo </h5>
             <% end %>
             <br><br>
         </div>

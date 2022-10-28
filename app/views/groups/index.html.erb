@@ -4,14 +4,13 @@
             <div class="col l12 s12 center-align">
                 <h3 style="display: inline"><b>Grupos de trabajo</b></h3>
                 <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;margin-bottom:20px">
-
                 <% if @status && @status == 'NO ES POSIBLE GENERAR LOS EQUIPOS DE:' %>
                 <div class="card-panel card-fix red lighten-4 red-text center-align">
                     <i class="material-icons medium">mood_bad</i>
                     <h5 class="h5-fix"><b>¡Ups! Algo no salió bien ... </b></h5>
                     <p style="margin: 4px;"> <%= @status %> </p>
                     <p style="margin: 4px;"><b> <%= @status_curso %> / </b></p>
-                    <p>Esto puede deberse a que el curso no cuenta con la cantidad apropiada de estudiantes para generar los equipos o porque ingresó una cantidad de estudiantes por grupo menor a <b>3</b></p>
+                    <p>Esto puede deberse a que el curso no cuenta con la cantidad apropiada de estudiantes para generar los equipos, porque ingresó una cantidad de estudiantes por grupo menor a <b>3</b> o porque los alumnos no han contestado sus test.</p>
                 </div>
                 <% elsif @status && @status == '¡GRUPOS GENERADOS CON ÉXITO!' %>
                 <div class="card-panel card-fix green lighten-4 green-text center-align">
@@ -51,8 +50,6 @@
                     <p></p>
                 </div>
             </div>
-
-
 
             <% @courses_show.each do |course| %>
             <div class="col s12 center-align">

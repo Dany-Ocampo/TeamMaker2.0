@@ -45,18 +45,9 @@
             </select>
         </div>
     </div>
-<!--<%= s.fields_for :subject do |sub| %>
-    <div class="col l6 m6 s12">
-              <div class="field">
-            <%= sub.label :name, "Asignatura" %>
-            <%= sub.text_field :name, autofocus: true, class: "validate", required: "true", placeholder:"Álgebra I"  %>
-            </div> 
-         <% end %>   
-    </div> -->
 </div>
 
 <div class="modal-footer">
-   <!-- <a class=" modal-action modal-close waves-effect btn red left">Volver</a> -->
     <%= s.submit 'Actualizar curso', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + course.code + "? ')",class: "btn left" %>
     <% end %>
     <!-- termino del form-->

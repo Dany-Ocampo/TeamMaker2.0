@@ -4,7 +4,7 @@
             <% if @course.errors.any? %>
             <div class="card-panel card-fix red lighten-4 red-text center-align">
                 <i class="material-icons medium">mood_bad</i>
-                <h5 class="h5-fix"><b>Ups!, algo no salió bien ... </b></h5>
+                <h5 class="h5-fix"><b>¡Ups!, algo no salió bien ... </b></h5>
                 <p style="margin: 4px;">- NO SE PUDO CREAR EL NUEVO CURSO -</p>
             </div>
             <% end %>
@@ -63,8 +63,6 @@
                         <td class="center">
                             <%= course.semester.to_s + '/' + course.year.to_s %>
                         </td>
-                       <!-- <td class="center">
-                            <%= course.subject.name %> -->
                         </td>
                         <td class="center">
                             <%= course.course_type.name %>

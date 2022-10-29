@@ -8,26 +8,32 @@
     <div class="card-panel" style="padding: 5px 24px;background-color: #444444 !important;">
       <p class="white-text" align="justify" style="margin: 5px 0;">
       Seleccione el archivo <b style="color:#5ab5ff;">.CSV</b> 
-      con los estudiantes a ingresar al sistema con el siguiente formato:</p>
+      con los estudiantes a ingresar al sistema con el siguiente formato. La columna "program" corresponde a la carrera, asegúrese de que esté escrita tal cual como aparece en el sistema. En la columna "gender" ingrese 0 si es masculino ó 1 si es femenino. Los elementos deben ir separados sólo por una coma, sin espacios (en el ejemplo se incluyen espacios sólo para la legibilidad):</p>
 
       <table class="white-text bordered centered responsive-table">
         <thead>
           <tr style="color:#5ab5ff;">
-            <th style="padding: 5px 5px;">email</th>
-            <th style="padding: 5px 5px;">name</th>
-            <th style="padding: 5px 5px;">surname</th>
-            <th style="padding: 5px 5px;">password</th>
-            <th style="padding: 5px 5px;">course</th>
+            <th style="padding: 5px 5px;">email,</th>
+            <th style="padding: 5px 5px;">name,</th>
+            <th style="padding: 5px 5px;">surname,</th>
+            <th style="padding: 5px 5px;">password,</th>
+            <th style="padding: 5px 5px;">course,</th>
+            <th style="padding: 5px 5px;">program,</th>
+            <th style="padding: 5px 5px;">gender,</th>
+            <th style="padding: 5px 5px;">age</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <td style="padding: 5px 5px;">pedro@mail.cl</td>
-            <td style="padding: 5px 5px;">Pedro</td>
-            <td style="padding: 5px 5px;">Araya</td>
-            <td style="padding: 5px 5px;">pass123</td>
-            <td style="padding: 5px 5px;">A-1</td>
+            <td style="padding: 5px 5px;">pedro@mail.cl,</td>
+            <td style="padding: 5px 5px;">Pedro,</td>
+            <td style="padding: 5px 5px;">Araya,</td>
+            <td style="padding: 5px 5px;">pass123,</td>
+            <td style="padding: 5px 5px;">Álgebra I,</td>
+            <td style="padding: 5px 5px;">Administración Pública,</td>
+            <td style="padding: 5px 5px;">0,</td>
+            <td style="padding: 5px 5px;">24</td>
           </tr>
           <tr>
             <td style="padding: 5px 5px;">...</td>
@@ -35,10 +41,6 @@
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
-          </tr>
-          <tr>
-            <td style="padding: 5px 5px;">...</td>
-            <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
@@ -49,8 +51,24 @@
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
           </tr>
           <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
+            <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
             <td style="padding: 5px 5px;">...</td>
@@ -59,25 +77,22 @@
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="file-field input-field">
-      <div class="row" href="#" style="margin-bottom: 0px;">
-        <div class="col s12 l2">
-          <div class="btn gris3 right">
-          <i class="material-icons" style="font-size:2rem">file_upload</i>
-          <%= file_field_tag :file, class:'align:center' %>
+      <div class="file-field input-field">
+        <div class="row" href="#" style="margin-bottom: 0px;">
+          <div class="col s12 l2">
+            <div class="btn gris3 right">
+            <i class="material-icons" style="font-size:2rem">file_upload</i>
+            <%= file_field_tag :file, class:'align:center' %>
+            </div>
           </div>
-        </div>
-        <div class="col s12 l10">
-          <input class="file-path validate" placeholder="Seleccionar archivo .CSV" />
-        </div>
-      </div>    
+          <div class="col s12 l10">
+            <input class="file-path validate" placeholder="Seleccionar archivo .CSV" />
+          </div>
+        </div>    
+      </div>
     </div>
   </div>
-
   <div class="modal-footer">
-  <!--  <a href="#!" class="modal-action modal-close waves-effect waves-red btn red left">Volver</a>  -->
     <input type="submit" name="commit" value="importar" data-disable-with="importar" class="waves-effect btn left" style="visibility: visible;">
   </div>
  <% end %>

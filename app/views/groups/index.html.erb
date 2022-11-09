@@ -10,12 +10,12 @@
                     <h5 class="h5-fix"><b>¡Ups! Algo no salió bien ... </b></h5>
                     <p style="margin: 4px;"> <%= @status %> </p>
                     <p style="margin: 4px;"><b> <%= @status_curso %> / </b></p>
-                    <p>Esto puede deberse a que el curso no cuenta con la cantidad apropiada de estudiantes para generar los equipos, porque ingresó una cantidad de estudiantes por grupo menor a <b>3</b> o porque los alumnos no han contestado sus test.</p>
+                    <p>Esto puede deberse a que el curso no cuenta con la cantidad apropiada de estudiantes para generar los equipos, porque ingresó una cantidad de estudiantes por grupo menor a <b>3</b> o porque los alumnos del curso no han contestado sus test.</p>
                 </div>
                 <% elsif @status && @status == '¡GRUPOS GENERADOS CON ÉXITO!' %>
                 <div class="card-panel card-fix green lighten-4 green-text center-align">
                     <i class="material-icons medium ">mood</i>
-                    <h5 class="h5-fix"><b>Todo bien ... </b></h5>
+                    <h5 class="h5-fix"><b>Todo salió bien ... </b></h5>
                     <p class="alert" style="margin: 4px;"> <%= @status %> </p>
                 </div>
                 <% end %>
@@ -26,7 +26,7 @@
                     <p><b>GENERAR GRUPOS</b></p>
                     <%= form_tag({:action => "index"}) do %>
                     <div class="input-field fix-placeholder">
-                        <input placeholder="n° de estudiantes" id="porGrupo" name="porGrupo" type="number" class="validate">
+                        <input placeholder="N° de estudiantes" id="porGrupo" name="porGrupo" type="number" class="validate">
                     </div>
                     <div class="input-field fix-placeholder">
                         <select placeholder="Curso" id="curso" name="curso" type="number" class="validate">
@@ -46,7 +46,7 @@
                     <p>Al conformar los equipos de trabajo considere lo siguiente:</p>
                     <li>N° de estudiantes mínimo por grupo deben ser 3 estudiantes.</li>
                     <li>Considere que la cantidad de integrantes por grupo no se diferencie por más de un estudiante.</li>
-                    <li>Verifique que todos los alumnos del curso hayan respondido los test correspondientes, de lo contrario no será incluido en ningún equípo.</li>
+                    <li>Verifique que todos los alumnos del curso hayan respondido los test correspondientes, quien no lo haya hecho no será incluido en ningún equípo.</li>
                     <p></p>
                 </div>
             </div>
@@ -91,8 +91,8 @@
                                                         <div class="card-stacked">
                                                             <div class="card-content">
                                                                 <h5 class="flow-text" align="center"><b><%= rel.user.name + ' ' + rel.user.surname %></b></h5>
-                                                                <p class="flow-text" align="center">Programa: <%= rel.user.programs.first.name %></p>
-                                                                <p class="flow-text" align="center"><%= rel.user.sex == 0 ? "Femenino" : "Masculino" %></p>
+                                                                <p class="flow-text" align="center">Carrera: <%= rel.user.programs.first.name %></p>
+                                                                <p class="flow-text" align="center">Sexo: <%= rel.user.sex == 0 ? "Femenino" : "Masculino" %></p>
                                                             </div>
                                                             <div class="card-action">
                                                                 <a class="orange-text modal-trigger" href="#verEstudiante<%= rel.user.id%>">Ver más...</a>

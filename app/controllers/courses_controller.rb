@@ -121,17 +121,11 @@ class CoursesController < ApplicationController
 
   def destroy
     @course = Course.find(params[:id])
-      
-    if !UserCourse.exists?(course_id: @course.id)
       if @course.destroy
         redirect_to(courses_path, notice: "Curso eliminado con éxito")
       else
         redirect_to(courses_path, notice: "No se ha podido procesar la solicitud")
       end
-    else
-      redirect_to(courses_path, alert: "Imposible eliminar curso, no esta vacío")
-    end
-
   end
 
     def my_courses_list

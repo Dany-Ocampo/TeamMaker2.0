@@ -142,6 +142,5 @@ class CoursesController < ApplicationController
 
 	def course_params
     params.require(:course).permit(:course_type_id, :code , :year, :semester)
-	  #params.require(:course).permit(:subject_id, :course_type_id, :code , :year, :semester)
 	end
 end

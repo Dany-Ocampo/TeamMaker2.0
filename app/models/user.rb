@@ -44,7 +44,6 @@ class User < ApplicationRecord
     $m = 0
     count_errors = 0
     $mark_import = false
-    #name,rut,email,password,user_type
     CSV.foreach(file.path, headers: true) do |row|
       $m = $m + 1     
       valid_name = false
@@ -116,7 +115,6 @@ class User < ApplicationRecord
         $mensaje_program = row["program"]
         $mensaje_gender = row["gender"]
         $mensaje_age = row["age"]
-        #raise "Problemas con fila"
       end
     end
 
@@ -126,19 +124,16 @@ class User < ApplicationRecord
           course = Course.find_by(code: row["course"])
           program = Program.find_by(name: row["program"])
           program.users.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"], sex: row["gender"].to_i, age: row["age"].to_i)
-          #User.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"])
           UserCourse.create!(course_id: course.id, user_id: User.last.id)
         end
       end
     rescue ActiveRecord::RecordInvalid
       $mark_import = true
-      #raise "El archivo contiene datos inválidos, verifique que en las columnas 'rut' sea un RUN válido, 'email' sea un correo válido y 'user_type' contenga un rol válido (Alumno, Ayudante con permisos básicos, Ayudante con permisos intermedios, Ayudante con permisos completos, Profesor o Administrador)."
     end
   end
 
   def self.check(file)
     @header_csv = ["email","name","surname","password","course","program", "gender", "age"]
-    #@header_csv = ["email","name","surname","password","course"]
     csv = CSV.open(file.path, :col_sep => ",", :headers => true)
     @header_file = csv.read.headers
     @users = User.all
@@ -178,8 +173,14 @@ class User < ApplicationRecord
 
   def init_tests
     if self.rol == 3
-        for i in(1..3)
-            self.tests.create(kind: i, status: true, answered: false)
+          self.tests.create(kind: 1, status: true, answered: false, course_id: nil)
+    end
+  end
+
+  def init_test_social(course_id)
+    if self.rol == 3
+        for i in(2..3)
+            self.tests.create(kind: i, status: true, answered: false, course_id: course_id)
         end
     end
   end

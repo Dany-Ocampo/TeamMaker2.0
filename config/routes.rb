@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   end
   
   get 'test_social' => 'social#index'
-  get 'test_social/test' => 'social#test' 
-  post 'test_social/test' => 'social#create' 
+  get 'test_social/:id/test' => 'social#test' 
+  get 'test_social/:id' => 'social#test_course' 
+  post 'test_social/:id/test' => 'social#create'
+
 
   get 'test_eneagrama' => 'psychological#index'
   get 'test_eneagrama/test' => 'psychological#test' 

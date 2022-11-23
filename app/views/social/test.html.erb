@@ -3,7 +3,7 @@
         <div class="col s12">
             <h3 style="display: inline">
                 <b>Test
-                    <% if current_user.tests.find_by(kind: 2, answered: true).present?  %>
+                    <% if current_user.tests.find_by(kind: 2, answered: true, course_id: @my_course.id).present?  %>
                     2/2: </b>
                 <h3 class="sub-titulo" style="display: inline; color:#2196F3 !important;">Social</h3>
                 <div class="card-panel blue lighten-2" style="padding: 10px 24px;">

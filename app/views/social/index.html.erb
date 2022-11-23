@@ -1,29 +1,22 @@
-<div class="container center title_sub" style="padding-top:5%">
-    <div class="row">
-        <div class="col s12">
-            <% if current_user.tests.find_by(kind: 2, answered: true).present? %>
-            <% if current_user.tests.find_by(kind: 3, answered: true).present? %>
-            <h2 style="display: inline"><b>¡Test de afinidad social completados!</b></h2>
-            <% else %>
-            <h2 style="display: inline"><b>Test de afinidad social 2/2</b></h2>
-            <% end %>
-            <% else %>
-            <h2 style="display: inline"><b>Test de afinidad social 1/2</b></h2>
-            <% end %>
-            <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
-            <p class="flow-text" align="justified">Los test de afinidad social permitirán conocer sus preferencias, indiferencias y rechazos en relación al resto de sus compañeros de curso. Esta información es relevante ya que, a través de ella, se considerarán sus afinidades para la conformación de los grupos de trabajo.</p>
-            <% if current_user.tests.find_by(kind: 2, answered: true).present? %>
-            <% if current_user.tests.find_by(kind: 3, answered: true).present? %>
-            <!--<div class="card-panel blue lighten-2">
-                <strong class="white-text bold">TEST RESPONDIDOS, pronto sabrá cuál es su equipo de trabajo.</strong>
-            </div> -->
-            <%= link_to "TEST RESPONDIDOS, pronto sabrá cuál es su equipo de trabajo", root_path , :class => "btn btn-large blue waves-effect waves-light"%>
-            <% else %>
-            <%= link_to "Ir a la segunda parte del test social", test_social_test_path , :class => "btn btn-large blue waves-effect waves-light"%>
-            <% end %>
-            <% else %>
-            <%= link_to "Ir a la primera parte del test social", test_social_test_path , :class => "btn btn-large blue waves-effect waves-light"%>
+<div style="padding-top:5%">
+    <div class="container">
+        <div class="row">
+            <div class="col l12 m12 s12 center-align" style="padding-bottom: 14px">
+                <h2 style="display: inline"><b>Estado de los test por curso</b></h2>
+                <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
+            </div>
+            <% current_user.courses.each do |course| %>
+            <div class="col s12 m6 l4" style="padding-top:20px" align="center">
+                <%= link_to '<i class="material-icons" style="font-size: 5rem;padding-top:40px">school</i><h4 class="center" style="margin:0;font-size: 1.4rem;">'.html_safe + course.code + '</h4>'.html_safe, "/test_social/" + course.id.to_s { |n|  }, class: "btn btn-default waves-effect waves-light features" , style: "height:200px; width:100%; background-color: #995E7D" %>
+                <% if current_user.tests.find_by(kind: 2, answered: true, course_id: course.id).present? && current_user.tests.find_by(kind: 3, answered: true, course_id: course.id).present? %>
+                    <h6 style="display: inline"><b>¡Test de afinidad social completados!</b></h6>
+                <% else %>
+                    <h6 style="display: inline" class="red-text"><b>Test pendientes</b></h6>
+                <% end %>
+            </div>
             <% end %>
         </div>
     </div>
 </div>
+</div>
+<br><br>

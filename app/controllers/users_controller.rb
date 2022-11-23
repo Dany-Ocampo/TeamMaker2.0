@@ -39,13 +39,14 @@ class UsersController < ApplicationController
      
       if  @courses == nil
         redirect_back(fallback_location: users_path, alert: "Usuario sin curso")
-    #elsif params[:user][:rol].to_i == 3 && @courses.count > 1
-     #   redirect_back(fallback_location: users_path, alert: "Estudiantes solo pueden tener una sección")
     else
 		  @userCourses = UserCourse.where(user_id: @user.id)
 		  @userCourses.each do |userCourse|
 		  	if !@courses.include? (userCourse.course_id.to_s)
+		  		t = @user.tests.find_by(course_id: userCourse.course_id)
+		  		t.destroy
 		  		userCourse.destroy
+
 		  	end
 		  end
 
@@ -54,6 +55,7 @@ class UsersController < ApplicationController
 			   userCourse = @user.user_courses.find_by(course_id: sec)
 			   if !userCourse.present?
 			   	UserCourse.create(course_id: sec,user_id: @user.id)
+			   	@user.init_test_social(sec)
 			   end
 			  end
 		  end

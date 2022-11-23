@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_230627) do
+ActiveRecord::Schema.define(version: 2022_11_14_224142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,24 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["test_id"], name: "index_answers_on_test_id"
+  end
+
+  create_table "course_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.bigint "subject_id", null: false
+    t.bigint "course_type_id", null: false
+    t.string "code"
+    t.integer "year"
+    t.integer "semester"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_type_id"], name: "index_courses_on_course_type_id"
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
   end
 
   create_table "eneatypes", force: :cascade do |t|
@@ -55,24 +73,6 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
     t.index ["user_id"], name: "index_programs_users_on_user_id"
   end
 
-  create_table "course_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "courses", force: :cascade do |t|
-    t.bigint "subject_id", null: false
-    t.bigint "course_type_id", null: false
-    t.string "code"
-    t.integer "year"
-    t.integer "semester"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_type_id"], name: "index_courses_on_course_type_id"
-    t.index ["subject_id"], name: "index_courses_on_subject_id"
-  end
-
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
     t.boolean "answered"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
@@ -127,12 +128,12 @@ ActiveRecord::Schema.define(version: 2020_07_11_230627) do
   end
 
   add_foreign_key "answers", "tests"
+  add_foreign_key "courses", "course_types"
+  add_foreign_key "courses", "subjects"
   add_foreign_key "eneatypes", "users"
   add_foreign_key "programs", "institutions"
   add_foreign_key "programs_users", "programs"
   add_foreign_key "programs_users", "users"
-  add_foreign_key "courses", "course_types"
-  add_foreign_key "courses", "subjects"
   add_foreign_key "tests", "users"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"

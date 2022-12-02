@@ -1,8 +1,8 @@
 <div class="container" style="padding-top:5%">
     <div class="row">
         <div class="col s12">
-            <h2 class="en-linea"><b>Editar configuración de: </b></h2>
-            <h2 class=" en-linea" style="color:#2196F3 !important;">Usuario</h2>
+            <h3 class="en-linea"><b>Editar configuración de: </b></h3>
+            <h3 class=" en-linea" style="color:#2196F3 !important;">Usuario</h3>
             <hr>
 
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -19,7 +19,7 @@
             </div>
 
             <div class="field">
-                <%= f.label :password_confirmation %><br />
+                <%= f.label :password_confirmation, "Confirme la nueva contraseña" %><br />
                 <%= f.password_field :password_confirmation, autocomplete: "off" %>
             </div>
 

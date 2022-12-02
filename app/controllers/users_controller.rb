@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       @user.programs = [program]
      
       if  @courses == nil
-        redirect_back(fallback_location: users_path, alert: "Usuario sin curso")
+        redirect_back(fallback_location: users_path, alert: "El usuario no puede quedar sin curso. Pruebe a suspender su cuenta o eliminarlo del sistema.")
     else
 		  @userCourses = UserCourse.where(user_id: @user.id)
 		  @userCourses.each do |userCourse|

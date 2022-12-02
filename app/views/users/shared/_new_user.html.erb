@@ -30,7 +30,7 @@
         <%= f.label :password_confirmation, "Confirmar contraseña" %>
         <%= f.password_field :password_confirmation, autocomplete: "off", class: "validate",required: "true", placeholder:"Vuelva a ingresar la contraseña." %>
     </div>
-        <%= label :sex, "Género" %>
+    <%= label :sex, "Género" %>
     <div class="input-field">
         <select name="user[sex]" class="browser-default">
             <option value=0>Masculino</option>
@@ -56,27 +56,18 @@
     </div>
     <br>
     <div class="field">
-        <%= f.label "Curso" %>
+        <%= f.label :course_id, "Curso" %>
         <div class="row">
             <% if current_user.rol == 0 %>
-            <% @courses.each do |s| %>
-            <div class="col s4 m4 l2">
-                <div class="field" class: "validate" , required: "true">
-                    <p><input id="NewCourse<%= s.id%>" name="courses[]" type="checkbox" value="<%= s.id%>" />
-                        <label for="NewCourse<%= s.id%>"><%= s.code%></label></p>
+                <% @courses.each do |s| %>
+                <div class="col s4 m4 l2">
+                    <div class="field" class: "validate" , required: "true">
+                        <p><input id="NewCourse<%= s.id%>" name="courses[]" type="checkbox"  value="<%= s.id%>" />
+                            <label for="NewCourse<%= s.id%>"><%= s.code%></label></p>
+                    </div>
                 </div>
-            </div>
-            <% end %>
-            <% elsif current_user.rol == 1 || current_user.rol == 2 %>
-            <div class="col s4 m4 l2">
-                <div class="field">
-                    <p>
-                        <input id="NewCourse<%= @curso.id%>" name="courses[<%= @curso.id%>]" type="radio" value="<%= @curso.id%>" checked />
-                        <label for="NewCourse<%= @curso.id%>"><%= @curso.code%></label>
-                    </p>
-                </div>
-            </div>
-            <% end %>
+                <% end %>
+            <% end %> 
         </div>
     </div><br>
     <div class="switch field">

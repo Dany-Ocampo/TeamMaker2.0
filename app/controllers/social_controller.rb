@@ -10,10 +10,9 @@ class SocialController < ApplicationController
   def test
     if user_signed_in? && current_user.rol == 3 && current_user.accept_model == true
       @my_course = Course.find(params[:id])
-      current_user.init_test_social(@my_course.id)
       if current_user.tests.find_by(kind: 2, answered: true, course_id: @my_course.id).present?
         if current_user.tests.find_by(kind: 3, answered: true, course_id: @my_course.id).present?
-          redirect_to test_social_path, notice: "tests ya respondidos"
+          redirect_to test_social_path, notice: "Tests ya respondidos"
         else
           allPartners = User.joins(:courses).where(courses: { id: @my_course.id }, rol: 3).where.not(id: current_user.id)
           answers = current_user.tests.find_by(kind: 2, answered: true, course_id: @my_course.id).answers

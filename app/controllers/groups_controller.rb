@@ -235,8 +235,11 @@ class GroupsController < ApplicationController
   def index
     # 1.CONVERSION DE DATOS DEL MODELO PSICOSOCIAL
     require 'matrix'
-    #@courses_show = Course.all
-    @courses_show = current_user.courses
+    if current_user.rol == 0
+      @courses_show = Course.all
+    else 
+      @courses_show = current_user.courses
+    end
     if params[:curso] 
       @courses_show = [Course.find(params[:curso])]
     end

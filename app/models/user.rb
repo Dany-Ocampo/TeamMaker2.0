@@ -8,12 +8,13 @@ class User < ApplicationRecord
 
   has_many :user_courses,  dependent: :destroy
   has_many :courses, :through => :user_courses
-  has_many :tests
+  has_many :tests, dependent: :destroy
   has_one :eneatype, dependent: :destroy
-  has_and_belongs_to_many :programs
+  has_and_belongs_to_many :programs, dependent: :destroy
 
   before_create :init_tests_conf
   after_create :init_tests
+  #after_create :init_test_social
 
   def group
     if self.user_courses.present?
@@ -123,8 +124,9 @@ class User < ApplicationRecord
         if count_errors == 0
           course = Course.find_by(code: row["course"])
           program = Program.find_by(name: row["program"])
-          program.users.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"], sex: row["gender"].to_i, age: row["age"].to_i)
-          UserCourse.create!(course_id: course.id, user_id: User.last.id)
+          user= program.users.create!(name: row["name"], surname: row["surname"], email: row["email"], password: row["password"], sex: row["gender"].to_i, age: row["age"].to_i)
+          UserCourse.create!(course_id: course.id, user_id: user.id)
+          user.begin_test_social(course.id)
         end
       end
     rescue ActiveRecord::RecordInvalid
@@ -169,6 +171,7 @@ class User < ApplicationRecord
 
   def courses=(value)
     @courses = value
+    init_test_social = value
   end
 
   def init_tests
@@ -177,13 +180,22 @@ class User < ApplicationRecord
     end
   end
 
-  def init_test_social(course_id)
+  def begin_test_social(course_id)
     if self.rol == 3
-        for i in(2..3)
-            self.tests.create(kind: i, status: true, answered: false, course_id: course_id)
-        end
+      self.tests.create(kind: 2, status: true, answered: false, course_id: course_id)
+      self.tests.create(kind: 3, status: true, answered: false, course_id: course_id)
     end
   end
+#
+#  def init_test_social
+#    if self.rol == 3
+#      self.user_courses.each do | uc |
+#        self.tests.create(kind: 2, status: true, answered: false, course_id: uc.course_id)
+#        self.tests.create(kind: 3, status: true, answered: false, course_id: uc.course_id)
+#      end
+#   end
+#  end
+
 
   def init_tests_conf
     if self.rol == 3

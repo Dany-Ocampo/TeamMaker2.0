@@ -43,10 +43,18 @@ class UsersController < ApplicationController
 		  @userCourses = UserCourse.where(user_id: @user.id)
 		  @userCourses.each do |userCourse|
 		  	if !@courses.include? (userCourse.course_id.to_s)
-		  		t = @user.tests.find_by(course_id: userCourse.course_id)
-		  		t.destroy
+		  		@tests =  Test.where(user_id: @user.id, course_id: userCourse.course_id)
+		  		@tests.each do |test|
+			  		@answers =  test.answers
+			      @answers.each do |answer|	
+	  				answer.destroy
+	  				end
+		      	test.destroy
+		    	end
+		  		#t = @user.tests.find_by(course_id: userCourse.course_id)
+		  		#t.answers.destroy_all
+		  		#t.destroy
 		  		userCourse.destroy
-
 		  	end
 		  end
 
@@ -54,8 +62,8 @@ class UsersController < ApplicationController
 			  @courses.each do |sec|
 			   userCourse = @user.user_courses.find_by(course_id: sec)
 			   if !userCourse.present?
-			   	UserCourse.create(course_id: sec,user_id: @user.id)
-			   	@user.init_test_social(sec)
+				   	UserCourse.create(course_id: sec,user_id: @user.id)
+				   	@user.begin_test_social(sec)
 			   end
 			  end
 		  end

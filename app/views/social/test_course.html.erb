@@ -1,26 +1,26 @@
 <div class="container center title_sub" style="padding-top:5%">
     <div class="row">
         <div class="col s12">
-            <% if current_user.tests.find_by(kind: 2, answered: true, course_id: @course.id).present? %>
-            <% if current_user.tests.find_by(kind: 3, answered: true, course_id: @course.id).present? %>
-            <h2 style="display: inline"><b>¡Test de afinidad social completados!</b></h2>
-            <% else %>
-            <h2 style="display: inline"><b>Test de afinidad social 2/2</b></h2>
-            <% end %>
-            <% else %>
-            <h2 style="display: inline"><b>Test de afinidad social 1/2</b></h2>
-            <% end %>
-            <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
-            <p class="flow-text" align="justified">Los test de afinidad social permitirán conocer sus preferencias, indiferencias y rechazos en relación al resto de sus compañeros de curso. Esta información es relevante ya que, a través de ella, se considerarán sus afinidades para la conformación de los grupos de trabajo.</p>
-            <% if current_user.tests.find_by(kind: 2, answered: true, course_id: @course.id).present? %>
-            <% if current_user.tests.find_by(kind: 3, answered: true, course_id: @course.id).present? %>
-            <%= link_to "TEST RESPONDIDOS, pronto sabrá cuál es su equipo de trabajo", root_path , :class => "btn btn-large blue waves-effect waves-light"%>
-            <% else %>
-            <%= link_to "Ir a la segunda parte del test social", "/test_social/#{@course.id}/test" , :class => "btn btn-large blue waves-effect waves-light"%>
-            <% end %>
-            <% else %>
-            <%= link_to "Ir a la primera parte del test social", "/test_social/#{@course.id}/test" , :class => "btn btn-large blue waves-effect waves-light"%>
-            <% end %>
+                <% if current_user.tests.find_by(kind: 2, answered: true, course_id: @course.id).present? %>
+                <% if current_user.tests.find_by(kind: 3, answered: true, course_id: @course.id).present? %>
+                <h2 style="display: inline"><b>¡Test de afinidad social completados!</b></h2>
+                <% else %>
+                <h2 style="display: inline"><b>Test de afinidad social 2/2</b></h2>
+                <% end %>
+                <% else %>
+                <h2 style="display: inline"><b>Test de afinidad social 1/2</b></h2>
+                <% end %>
+                <hr style="height: 5px;background-color: #2196F3;border-color: transparent !important;">
+                <p class="flow-text" align="justified">Los test de afinidad social permitirán conocer sus preferencias, indiferencias y rechazos en relación al resto de sus compañeros de curso. Esta información es relevante ya que, a través de ella, se considerarán sus afinidades para la conformación de los grupos de trabajo.</p>
+                <% if current_user.tests.find_by(kind: 2, answered: true, course_id: @course.id).present? %>
+                <% if current_user.tests.find_by(kind: 3, answered: true, course_id: @course.id).present? %>
+                <%= link_to "TEST RESPONDIDOS, pronto sabrá cuál es su equipo de trabajo", root_path , :class => "btn btn-large blue waves-effect waves-light"%>
+                <% else %>
+                <%= link_to "Ir a la segunda parte del test social", "/test_social/#{@course.id}/test" , :class => "btn btn-large blue waves-effect waves-light"%>
+                <% end %>
+                <% else %>
+                <%= link_to "Ir a la primera parte del test social", "/test_social/#{@course.id}/test" , :class => "btn btn-large blue waves-effect waves-light"%>
+                <% end %>
         </div>
     </div>
 </div>

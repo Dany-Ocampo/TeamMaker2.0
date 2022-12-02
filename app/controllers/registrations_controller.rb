@@ -31,6 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
             if @user.save
               @courses.each do |course_id|
                 UserCourse.create(course_id: course_id,user_id: @user.id)
+                @user.begin_test_social(course_id)
               end
             #  elsif current_user.rol == 1
             #    UserSection.create(course_id: @courses.to_i,user_id: @user.id)

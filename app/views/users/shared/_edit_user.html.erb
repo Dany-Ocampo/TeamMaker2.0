@@ -25,8 +25,8 @@
         <%= label :sex, "Género" %>
     <div class="input-field">
         <select name="user[sex]" class="browser-default">
-            <option value=0>Masculino</option>
-            <option value=1>Femenino</option>
+            <option <%if f.object.sex == 0 %>selected<% end %>value=0>Masculino</option>
+            <option <%if f.object.sex == 1 %>selected<% end %>value=1>Femenino</option>
         </select>
     </div>
     <%= label :rol, "Rol" %>

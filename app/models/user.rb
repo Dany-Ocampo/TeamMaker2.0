@@ -196,7 +196,6 @@ class User < ApplicationRecord
 #   end
 #  end
 
-
   def init_tests_conf
     if self.rol == 3
         self.accept_model = true

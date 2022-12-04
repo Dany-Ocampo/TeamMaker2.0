@@ -31,7 +31,7 @@
               </li>
               <li>
                 <% if current_user.tests.find_by(kind: 2, answered: false) %>
-                  <%= link_to 'Afinidad social<span class="new badge red" data-badge-caption="test">2</span>'.html_safe,test_social_path %>
+                  <%= link_to 'Afinidad social<span class="new badge red" data-badge-caption="test">2+</span>'.html_safe,test_social_path %>
                 <% elsif current_user.tests.find_by(kind: 3, answered: false) %>
                   <%= link_to 'Afinidad social<span class="new badge red" data-badge-caption="test">1</span>'.html_safe,test_social_path %>
                 <% else %>
@@ -73,7 +73,6 @@
           <% elsif current_user.rol == 1 || current_user.rol == 2 %>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown_course">Mis cursos<i class="material-icons right">arrow_drop_down</i></a></li>
             <li class="<%= 'active' if current_page?(grupos_path) %>"><%= link_to "Mis grupos", grupos_path %></li>
-            <!--<li><a class="dropdown-button" href="#!" data-activates="dropdown_group">Mis grupos<i class="material-icons right">arrow_drop_down</i></a></li> -->
           <% end %>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown_user"><%=current_user.email%><i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
@@ -107,7 +106,7 @@
               </li>
               <li>
                 <% if current_user.tests.find_by(kind: 2, answered: false).present? %>
-                  <%= link_to 'Afinidad social<span class="new badge red mid" data-badge-caption="test">2</span>'.html_safe,test_social_path %>
+                  <%= link_to 'Afinidad social<span class="new badge red mid" data-badge-caption="test">2+</span>'.html_safe,test_social_path %>
                 <% elsif current_user.tests.find_by(kind: 3, answered: false).present? %>
                   <%= link_to 'Afinidad social<span class="new badge red mid" data-badge-caption="test">1</span>'.html_safe,test_social_path %>
                 <% else %>

@@ -48,7 +48,7 @@
             </p>
             <% if user.rol == 3%>
             <p>
-                <b>Programas:</b>
+                <b>Carrera:</b>
                 <% user.programs.each do |p| %>
                     <span class='chip'>
                         <%= p.name %>
@@ -67,20 +67,19 @@
                 <% end %>
             </p>
         </div>
-        <% if user.rol == 3 %>
+        <% if user.rol == 3 && current_user.rol != 3 %>
         <div class="col l6">
             <% if user.accept_model == true %>
             <p>
                 <b>
-                    <p style="margin-bottom: 0px;">Estado test de afinidad social:</p>
+                    <p style="margin-bottom: 0px;">Estado test de afinidad social general (todos los cursos):</p>
                 </b>
-
                 <% if !user.tests.find_by(kind: 2).answered? %>
-                <span class="new badge red" data-badge-caption="0/2 test" style="margin: 0;"></span>
+                <span class="new badge red" data-badge-caption="Test pendientes" style="margin: 0;"></span>
                 <% elsif !user.tests.find_by(kind: 3).answered? %>
-                <span class="new badge amber darken-1" data-badge-caption="1/2 test" style="margin: 0;"></span>
+                <span class="new badge amber darken-1" data-badge-caption="Test pendientes" style="margin: 0;"></span>
                 <% else %>
-                <span class="new badge green" data-badge-caption="Test resueltos" style="margin: 0;"></span>
+                <span class="new badge green" data-badge-caption="Test resueltos" style="margin:0;"></span>
                 <% end %>
             </p>
 

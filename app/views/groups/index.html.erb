@@ -30,7 +30,7 @@
                     </div>
                     <div class="input-field fix-placeholder">
                         <select placeholder="Curso" id="curso" name="curso" type="number" class="validate">
-                            <% if current_user.rol == 1 %>
+                            <% if current_user.rol == 1 || current_user.rol == 2 %>
                                 <% current_user.courses.each do |course| %>
                                 <option value="<%= course.id %>"><%= course.code %></option>
                                 <% end %>

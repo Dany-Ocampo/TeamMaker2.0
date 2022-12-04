@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 			@user = User.new
 			@courses = Course.all
 			@programs = Program.all
+			@count = 0
 			
 		  per_page = 5
 		  if params[:per_page]

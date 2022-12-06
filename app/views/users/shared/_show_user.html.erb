@@ -15,7 +15,7 @@
         <% else %>
         <span style="color:#2196F3 !important;">No definido</span>
         <% end %>
-        <% if current_user.rol == 1 || current_user.rol == 0 %>
+        <% if current_user.rol == 1 || current_user.rol == 0 || current_user.rol == 2 %>
         <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#editarUsuario<%= user.id%>" style="background-color:#ff9800; border-color:#e68900;font-size: 16px"><i class="material-icons">mode_edit</i></a>
         <% end %>
     </h3>

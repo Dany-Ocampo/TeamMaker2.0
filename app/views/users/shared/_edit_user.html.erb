@@ -29,14 +29,16 @@
             <option <%if f.object.sex == 1 %>selected<% end %>value=1>Femenino</option>
         </select>
     </div>
-    <%= label :rol, "Rol" %>
-    <div class="input-field">
-        <select name="user[rol]" class="browser-default">
-            <option <%if f.object.rol == 3 %>selected<% end %> value=3>Alumno</option>
-            <option <%if f.object.rol == 2 %>selected<% end %> value=2>Ayudante</option>
-            <% if current_user.rol == 0 %><option <%if f.object.rol == 1 %>selected<% end %> value=1>Profesor</option><% end %>
-        </select>
-    </div>
+    <% if current_user.rol == 0 %>
+        <%= label :rol, "Rol" %>
+        <div class="input-field">
+            <select name="user[rol]" class="browser-default">
+                <option <%if f.object.rol == 3 %>selected<% end %> value=3>Alumno</option>
+                <option <%if f.object.rol == 2 %>selected<% end %> value=2>Ayudante</option>
+                <% if current_user.rol == 0 %><option <%if f.object.rol == 1 %>selected<% end %> value=1>Profesor</option><% end %>
+            </select>
+        </div>
+    <% end %>
     <%= label :program_id, "Programa" %>
     <div class="field">
         <select name="user[program_id]" class="browser-default">
@@ -71,6 +73,7 @@
         Activo
     </div>
 </div>
+
 <div class="modal-footer">
     <%= f.submit 'Actualizar usuario', :onclick => "return confirm('¿Estás seguro que deseas cambiar los datos de " + user.email.to_s + "? ')",class: "btn left" %>
     <% end %>

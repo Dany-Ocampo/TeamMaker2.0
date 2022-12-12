@@ -6,7 +6,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if user_signed_in? %>  
           <ul id="dropdown_user" class="dropdown-content" style="margin-top: 64px;">
-            <li><%= link_to 'Cuenta',edit_user_registration_path %></li>
+            <!-- <li><%= link_to 'Cuenta',edit_user_registration_path %></li>-->
             <li role="separator" class="divider"></li>
             <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete%></li>
           </ul>

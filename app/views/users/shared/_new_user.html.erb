@@ -33,14 +33,14 @@
     <%= label :sex, "Género" %>
     <div class="input-field">
         <select name="user[sex]" class="browser-default">
-            <option value=0>Masculino</option>
+            <option selected value=0>Masculino</option>
             <option value=1>Femenino</option>
         </select>
     </div>
     <%= label :rol, "Rol" %>
     <div class="input-field">
         <select name="user[rol]" class="browser-default">
-            <option value=3>Estudiante</option>
+            <option selected value=3>Estudiante</option>
             <option value=2>Ayudante</option>
             <% if current_user.rol == 0 %><option value=1>Profesor</option><% end %>
         </select>

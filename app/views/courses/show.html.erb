@@ -91,6 +91,8 @@
             <table class="striped centered responsive-table">
                 <thead>
                     <tr>
+                        <th>Nombre(s)</th>
+                        <th>Apellido(s)</th>
                         <th>Correo</th>
                         <th>Estado</th>
                         <th><% if current_user.rol == 1 || current_user.rol == 2 %>Acciones <% else %> Ver <% end %></th>
@@ -108,6 +110,8 @@
                     </div>
 
                     <tr <%if user.status == false%> style="color:#F44336;" <% end %>>
+                        <td><%= user.name %></td>
+                        <td><%= user.surname %></td>
                         <td><%= user.email %></td>
                         <td>
                             <% if user.status == true %>

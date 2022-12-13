@@ -24,16 +24,16 @@
             <% if current_user.accept_model? %>
               <li>
                 <% if current_user.test_count != 6 %>
-                  <%= link_to 'Personalidad<span class="new badge red" style="margin-left:14px" data-badge-caption="test">1</span>'.html_safe,test_eneagrama_path %>
+                  <%= link_to 'Personalidad<span class="new badge red" data-badge-caption="test">1</span>'.html_safe,test_eneagrama_path %>
                 <% else %>
-                  <%= link_to 'Personalidad<span class="new badge green" style="margin-left:14px" data-badge-caption="resuelto"></span>'.html_safe,test_eneagrama_path %>
+                  <%= link_to 'Personalidad<span class="new badge green" data-badge-caption="resuelto"></span>'.html_safe,test_eneagrama_path %>
                 <% end %>
               </li>
               <li>
                 <% if current_user.tests.find_by(kind: 2, answered: false) %>
-                  <%= link_to 'Afinidad social<span class="new badge red" data-badge-caption="test">2+</span>'.html_safe,test_social_path %>
+                  <%= link_to 'Social <span class="new badge red" style="margin-left:63px" data-badge-caption="test">2+</span>'.html_safe,test_social_path %>
                 <% elsif current_user.tests.find_by(kind: 3, answered: false) %>
-                  <%= link_to 'Afinidad social<span class="new badge red" data-badge-caption="test">1</span>'.html_safe,test_social_path %>
+                  <%= link_to 'Social<span class="new badge red" style="margin-left:53px" data-badge-caption="test">1</span>'.html_safe,test_social_path %>
                 <% else %>
                   <%= link_to 'Social<span class="new badge green" data-badge-caption="resuelto" style="margin-left:63px"></span>'.html_safe,test_social_path %>
                 <% end %>

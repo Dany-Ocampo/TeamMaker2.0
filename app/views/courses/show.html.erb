@@ -94,7 +94,7 @@
                         <th>Nombre(s)</th>
                         <th>Apellido(s)</th>
                         <th>Correo</th>
-                        <th>Estado</th>
+                        <!--<th>Estado</th>-->
                         <th><% if current_user.rol == 1 || current_user.rol == 2 %>Acciones <% else %> Ver <% end %></th>
                     </tr>
                 </thead>
@@ -113,7 +113,7 @@
                         <td><%= user.name %></td>
                         <td><%= user.surname %></td>
                         <td><%= user.email %></td>
-                        <td>
+                        <!--<td>
                             <% if user.status == true %>
                             Activo
                             <% elsif user.status == false %>
@@ -121,7 +121,7 @@
                             <% else %>
                             No definido
                             <% end %>
-                        </td>
+                        </td>-->
                         <td>
                             <a class="btn btn-floating waves-effect waves-light modal-trigger" href="#verUsuario<%= user.id%>" style="background-color:#2196f3; border-color:#0d8aee"><i class="material-icons">perm_identity</i></a>
                             <% if current_user.rol == 1 || current_user.rol == 2 %>

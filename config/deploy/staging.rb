@@ -21,8 +21,8 @@
 #role :web, %w{ubuntu@ec2-18-234-216-166.compute-1.amazonaws.com}
 #role :db,  %w{ubuntu@ec2-18-234-216-166.compute-1.amazonaws.com}
 
-set :user, "ubuntu"
-server "ec2-3-85-25-189.compute-1.amazonaws.com", roles: [:app, :web, :db]
+#set :user, "ubuntu"
+#server "ec2-3-85-25-189.compute-1.amazonaws.com", roles: [:app, :web, :db]
 # set :master_key_local_path, "/home/lucas/Documents/Memoria/new-team-maker/config/master.key"
 
 
@@ -44,21 +44,21 @@ server "ec2-3-85-25-189.compute-1.amazonaws.com", roles: [:app, :web, :db]
 #
 # Global options
 # --------------
-set :ssh_options, {
-  keys: %w(/home/lucas/.aws/MyVM.pem),
-  forward_agent: true,
-  user: 'ubuntu'
-}
+#set :ssh_options, {
+#  keys: %w(/home/lucas/.aws/MyVM.pem),
+#  forward_agent: true,
+#  user: 'ubuntu'
+#}
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-# server "example.com",
-#   user: "user_name",
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: "user_name", # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: "please use keys"
-#   }
+server "174.129.59.169",
+   user: "ubuntu",
+   roles: %w{web app db},
+   ssh_options: {
+     user: "ubuntu", # overrides user setting above
+     keys: %w(/home/daniela/.ssh/id_rsa),
+     forward_agent: false,
+     auth_methods: %w(publickey password)
+     # password: "please use keys"
+   }

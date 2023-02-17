@@ -2152,6 +2152,7 @@ html {
   /* 2 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  box-sizing: border-box;
 }
 
 /**
@@ -2349,7 +2350,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  font-family: monospace;
   font-size: 1em;
 }
 
@@ -2534,9 +2535,6 @@ th {
   padding: 0;
 }
 
-html {
-  box-sizing: border-box;
-}
 
 *, *:before, *:after {
   box-sizing: inherit;

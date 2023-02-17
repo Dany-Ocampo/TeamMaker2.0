@@ -82,3 +82,6 @@ gem 'caxlsx'
 gem 'caxlsx_rails'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+gem 'ed25519', '>= 1.2'
+gem 'bcrypt_pbkdf', '>= 1.0'

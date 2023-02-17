@@ -1,10 +1,10 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.14.1"
+lock "~> 3.16.0"
 
 set :stage, 'production'
 
-set :application, "new_teammaker"
-set :repo_url, "git@github.com:Aurorawr/new-teammaker.git"
+set :application, "TeamMaker2"
+set :repo_url, "https://github.com/Dany-Ocampo/TeamMaker2.0.git"
 set :user, 'ubuntu'
 set :puma_threads, [4, 16]
 set :puma_workers, 0
@@ -25,7 +25,7 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
-set :linked_files, fetch(:linked_files, []).push("config/master.key")
+#set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
 namespace :puma do
     desc 'Create Directories for Puma Pids and Socket'
@@ -55,7 +55,6 @@ namespace :deploy do
     task :initial do
         on roles(:app) do
             before 'deploy:restart', 'puma:start'
-            invoke 'setup:copy_linked_master_key'
             invoke 'deploy'
         end
     end

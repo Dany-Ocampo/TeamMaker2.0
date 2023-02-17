@@ -25,9 +25,9 @@ $(document).ready(function(){
 
 $("#btnValidPsychological").click(function(event) {
 
-for(j=1;j<45;j++){
-  var a = 0, rdbtn=document.getElementsByName("[answer" + j + "]")
-  for(i=0;i<rdbtn.length;i++){
+for(var j=1;j<45;j++){
+  let a = 0, rdbtn=document.getElementsByName("[answer" + j + "]")
+  for(var i=0;i<rdbtn.length;i++){
     if(rdbtn.item(i).checked == false){
       a++;
     }
@@ -47,10 +47,10 @@ for(j=1;j<45;j++){
 
 $("#btnValidPsycho1").click(function(event) {
 
-answer = document.getElementsByName("answer");
+const answer = document.getElementsByName("answer");
  
-var seleccionado = false;
-for(var i=0; i<answer.length; i++) {    
+let seleccionado = false;
+for(let i=0; i<answer.length; i++) {    
   if(answer[i].checked) {
     seleccionado = true;
     break;

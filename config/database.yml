@@ -85,5 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: tm_database
+  user: tm_user
+  database: teammaker2
   password: newtm369

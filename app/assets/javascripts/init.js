@@ -25,9 +25,9 @@ $(document).ready(function(){
 
 $("#btnValidPsychological").click(function(event) {
 
-for(var j=1;j<45;j++){
+for(let j=1;j<45;j++){
   let a = 0, rdbtn=document.getElementsByName("[answer" + j + "]")
-  for(var i=0;i<rdbtn.length;i++){
+  for(let i=0;i<rdbtn.length;i++){
     if(rdbtn.item(i).checked == false){
       a++;
     }

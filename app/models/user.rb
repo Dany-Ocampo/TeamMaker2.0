@@ -207,7 +207,7 @@ end
   def self.search(search, search_rol, search_status)
     if search
       #where("UPPER(email) LIKE :q OR rol LIKE :q", q: "%#{params[:search].upcase}%")
-      where([" email LIKE ? AND cast(rol as text) LIKE ? AND cast(status as text) LIKE ?",
+      where([" email || name || surname LIKE ? AND cast(rol as text) LIKE ? AND cast(status as text) LIKE ?",
             "%#{search}%","%#{search_rol}%","%#{search_status}%"])
     else
       all

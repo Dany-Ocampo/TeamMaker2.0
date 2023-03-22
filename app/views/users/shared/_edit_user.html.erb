@@ -5,6 +5,7 @@
 <div class="modal-content">
     <h3><b>Editar usuario</h3></b>
     <%= form_for(user) do |f| %>
+    <% carrera = user.programs.first %>
     <!-- Inicio de form -->
     <div class="field">
         <%= f.label :email, "Correo electrónico" %>
@@ -25,8 +26,8 @@
         <%= label :sex, "Género" %>
     <div class="input-field">
         <select name="user[sex]" class="browser-default">
-            <option <%if f.object.sex == 0 %>selected<% end %>value=0>Masculino</option>
-            <option <%if f.object.sex == 1 %>selected<% end %>value=1>Femenino</option>
+            <option <%if user.sex == 0 %>selected <% end %> value=0>Masculino</option>
+            <option <%if user.sex == 1 %>selected <% end %> value=1>Femenino</option>
         </select>
     </div>
     <% if current_user.rol == 0 %>
@@ -43,7 +44,7 @@
     <div class="field">
         <select name="user[program_id]" class="browser-default">
             <% @programs.each do |program| %>
-            <option value=<%= program.id %>><%= program.name %></option>
+            <option value=<%= program.id %> <%if program.id == carrera.id %>selected<% end %>><%= program.name %></option> 
             <% end %>
         </select>
     </div>

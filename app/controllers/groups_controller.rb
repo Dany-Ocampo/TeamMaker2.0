@@ -806,9 +806,6 @@ end
 
 
     d.each_with_index do |e, index|
-      if d==nil
-        dPorcion[index] = 0
-      end
       dPorcion[index] = (d.max/e).round(0)
       #puts "d Porcion " + e.to_s + " con " + index.to_s + ": " + dPorcion[index].to_s
     end

@@ -806,7 +806,7 @@ end
 
 
     d.each_with_index do |e, index|
-      if d.max==nil or e==nil
+      if d==nil
         dPorcion[index] = 0
       end
       dPorcion[index] = (d.max/e).round(0)
